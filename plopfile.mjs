@@ -1,87 +1,216 @@
 export default function (plop) {
-  // 1. GENERADOR DE FEATURE COMPLETA (Slice)
+
+  // =========================
+  // 🔹 1. FEATURE GENERATOR
+  // =========================
   plop.setGenerator('feature', {
-    description: 'Crea una nueva funcionalidad (Página, Service, Hook)',
+    description: 'Crear nueva feature (Vertical Slice)',
     prompts: [
       {
         type: 'input',
-        name: 'name',
+        name: 'featureName',
         message: 'Nombre de la feature (ej: rooms, booking):'
+      },
+      {
+        type: 'confirm',
+        name: 'addPage',
+        message: '¿Crear Page?',
+        default: false
       }
     ],
-    actions: [
-      // Página principal
-      {
+    actions: function (data) {
+      const actions = [];
+      const basePath = 'src/features/{{kebabCase featureName}}';
+
+      // --- Carpetas base ---
+      actions.push({
         type: 'add',
-        path: 'src/features/{{dashCase name}}/{{pascalCase name}}Page.tsx',
-        template: 'import styles from "./{{pascalCase name}}Page.module.css";\n\nexport const {{pascalCase name}}Page = () => {\n  return (\n    <div className={styles.container}>\n      <h1>{{pascalCase name}} Page</h1>\n    </div>\n  );\n};'
-      },
-      // CSS de la página
-      {
+        path: `${basePath}/components/.gitkeep`,
+        template: ''
+      });
+
+      actions.push({
         type: 'add',
-        path: 'src/features/{{dashCase name}}/{{pascalCase name}}Page.module.css',
-        template: '.container { padding: 20px; }'
-      },
-      // Service base
-      {
+        path: `${basePath}/hooks/use{{pascalCase featureName}}.ts`,
+        template: `import { useEffect, useState } from "react";
+import { get{{pascalCase featureName}} } from "../services/{{camelCase featureName}}.service";
+
+export function use{{pascalCase featureName}}() {
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    get{{pascalCase featureName}}().then((res) => {
+      setData(res);
+      setLoading(false);
+    });
+  }, []);
+
+  return { data, loading };
+}`
+      });
+
+      actions.push({
         type: 'add',
-        path: 'src/features/{{dashCase name}}/services/{{camelCase name}}Service.ts',
-        template: 'import api from "../../../shared/api/api"; // Ajusta según tu ruta de axios\n\nexport const get{{pascalCase name}}Data = async () => {\n  const response = await api.get("/{{dashCase name}}");\n  return response.data;\n};'
-      },
-      // Hook base
-      {
+        path: `${basePath}/services/{{camelCase featureName}}.service.ts`,
+        template: `import apiClient from "../../../shared/services/apiClient";
+import type { {{pascalCase featureName}} } from "../types/{{camelCase featureName}}.types";
+
+export async function get{{pascalCase featureName}}(): Promise<{{pascalCase featureName}}[]> {
+  const response = await apiClient.get("/{{kebabCase featureName}}");
+  return response.data;
+}
+
+export async function get{{pascalCase featureName}}ById(id: string): Promise<{{pascalCase featureName}}> {
+  const response = await apiClient.get(\`/{{kebabCase featureName}}/\${id}\`);
+  return response.data;
+}
+`
+      });
+
+      actions.push({
         type: 'add',
-        path: 'src/features/{{dashCase name}}/hooks/use{{pascalCase name}}.ts',
-        template: 'import { useState, useEffect } from "react";\n\nexport const use{{pascalCase name}} = () => {\n  const [data, setData] = useState(null);\n  const [loading, setLoading] = useState(true);\n\n  return { data, loading };\n};'
+        path: `${basePath}/types/{{camelCase featureName}}.types.ts`,
+        template: `export interface {{pascalCase featureName}} {
+  id: string;
+  name: string;
+}`
+      });
+
+      // --- Componente base ---
+      actions.push({
+        type: 'add',
+        path: `${basePath}/components/{{pascalCase featureName}}.tsx`,
+        template: `import styles from "./{{pascalCase featureName}}.module.css";
+
+interface Props {
+  data?: any;
+}
+
+export const {{pascalCase featureName}} = ({ data }: Props) => {
+  return (
+    <div className={styles.container}>
+      <h2>{{pascalCase featureName}}</h2>
+    </div>
+  );
+};`
+      });
+
+      actions.push({
+        type: 'add',
+        path: `${basePath}/components/{{pascalCase featureName}}.module.css`,
+        template: `.container {
+  padding: 1rem;
+}`
+      });
+
+      // --- Page opcional ---
+      if (data.addPage) {
+        actions.push({
+          type: 'add',
+          path: `${basePath}/{{pascalCase featureName}}Page.tsx`,
+          template: `import { use{{pascalCase featureName}} } from "./hooks/use{{pascalCase featureName}}";
+import { {{pascalCase featureName}} } from "./components/{{pascalCase featureName}}";
+
+export const {{pascalCase featureName}}Page = () => {
+  const { data, loading } = use{{pascalCase featureName}}();
+
+  if (loading) return <p>Cargando...</p>;
+
+  return (
+    <main>
+      <h1>{{pascalCase featureName}}</h1>
+      <{{pascalCase featureName}} data={data} />
+    </main>
+  );
+};`
+        });
       }
-    ]
+
+      return actions;
+    }
   });
 
-  // 2. GENERADOR DE COMPONENTES INTERNOS DE FEATURE
+  // =========================
+  // 🔹 2. COMPONENTE EN FEATURE
+  // =========================
   plop.setGenerator('feature-component', {
-    description: 'Crea un componente dentro de una feature existente',
+    description: 'Crear componente dentro de una feature',
     prompts: [
       {
         type: 'input',
         name: 'feature',
-        message: '¿A qué feature pertenece? (ej: home, rooms):'
+        message: 'Feature (ej: home, rooms):'
       },
       {
         type: 'input',
         name: 'name',
-        message: 'Nombre del componente (ej: Hero, RoomCard):'
+        message: 'Nombre del componente:'
       }
     ],
     actions: [
       {
         type: 'add',
-        path: 'src/features/{{dashCase feature}}/components/{{pascalCase name}}.tsx',
-        template: 'export const {{pascalCase name}} = () => {\n  return <div>{{pascalCase name}}</div>;\n};'
+        path: 'src/features/{{kebabCase feature}}/components/{{pascalCase name}}.tsx',
+        template: `import styles from "./{{pascalCase name}}.module.css";
+
+interface Props {}
+
+export const {{pascalCase name}} = ({}: Props) => {
+  return (
+    <div className={styles.container}>
+      {{pascalCase name}}
+    </div>
+  );
+};`
+      },
+      {
+        type: 'add',
+        path: 'src/features/{{kebabCase feature}}/components/{{pascalCase name}}.module.css',
+        template: `.container {
+  display: block;
+}`
       }
     ]
   });
 
-  // 3. GENERADOR DE SHARED UI
-  plop.setGenerator('shared-ui', {
-    description: 'Crea un componente reutilizable en shared/ui',
+  // =========================
+  // 🔹 3. SHARED COMPONENT
+  // =========================
+  plop.setGenerator('shared-component', {
+    description: 'Crear componente compartido (shared/ui)',
     prompts: [
       {
         type: 'input',
         name: 'name',
-        message: 'Nombre del componente UI (ej: Button, Card):'
+        message: 'Nombre del componente (ej: Button):'
       }
     ],
     actions: [
       {
         type: 'add',
         path: 'src/shared/ui/{{pascalCase name}}/{{pascalCase name}}.tsx',
-        template: 'import styles from "./{{pascalCase name}}.module.css";\n\ninterface Props {}\n\nexport const {{pascalCase name}} = ({}: Props) => {\n  return <div className={styles.base}>{{pascalCase name}}</div>;\n};'
+        template: `import styles from "./{{pascalCase name}}.module.css";
+
+interface Props {}
+
+export const {{pascalCase name}} = ({}: Props) => {
+  return (
+    <div className={styles.base}>
+      {{pascalCase name}}
+    </div>
+  );
+};`
       },
       {
         type: 'add',
         path: 'src/shared/ui/{{pascalCase name}}/{{pascalCase name}}.module.css',
-        template: '.base { /* estilos base */ }'
+        template: `.base {
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+}`
       }
     ]
   });
-}
+
+};
