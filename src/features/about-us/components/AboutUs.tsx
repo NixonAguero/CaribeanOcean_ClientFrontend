@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
-import styles from "./AboutUs.module.css";
+import React from 'react';
+import styles from "../styles/AboutUs.module.css";
 import { useAboutUs } from "../hooks/useAboutUs";
+import { Gallery } from "./Gallery";
 
 export const AboutUs: React.FC = () => {    
   const { data, loading } = useAboutUs();
-  const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
 
   if (loading || !data) {
-    return <div className={styles.loading}>Loading...</div>;
+    return <div className={styles.loading}>The Caribbean Ocean Resort & Spa</div>;
   }
-
-  const mainImage = data.gallery.find(img => img.id === selectedImageId) || data.gallery[0];
-  const thumbnails = data.gallery.filter(img => img.id !== mainImage?.id);
 
   return (
     <section className={styles.aboutSection}>
@@ -22,24 +19,8 @@ export const AboutUs: React.FC = () => {
         <p className={styles.description}>{data.aboutUs.description}</p>
       </div>
 
-      {data.gallery.length > 0 && (
-        <div className={styles.aboutUsGallery}>
-          <img 
-            src={mainImage.image} 
-            alt={mainImage.description} 
-            className={styles.galleryImage} 
-          />
-          {thumbnails.map((img) => (
-            <img 
-              src={img.image} 
-              alt={img.description} 
-              key={img.id} 
-              className={`${styles.galleryImage} ${styles.galleryThumb}`}
-              onClick={() => setSelectedImageId(img.id)}
-            />
-          ))}
-        </div>
-      )}
+      <Gallery gallery={data.gallery} styles={styles} />
+      
     </section>
   );
 };
