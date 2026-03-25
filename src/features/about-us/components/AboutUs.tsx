@@ -1,9 +1,8 @@
-import React from 'react';
 import styles from "../styles/AboutUs.module.css";
 import { useAboutUs } from "../hooks/useAboutUs";
-import { Gallery } from "./Gallery";
+import Gallery from "./Gallery";
 
-export const AboutUs: React.FC = () => {    
+export default function AboutUs() {    
   const { data, loading } = useAboutUs();
 
   if (loading || !data) {

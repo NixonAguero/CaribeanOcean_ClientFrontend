@@ -1,12 +1,12 @@
 import type { AboutUsGallery } from "../types/AboutUsGallery";
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 interface GalleryProps {
     gallery: AboutUsGallery[];
     styles: Record<string, string>;
 }
 
-export const Gallery: React.FC<GalleryProps> = ({ gallery, styles }) => {
+export default function Gallery({ gallery, styles }: GalleryProps)   {
 
     const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
 
