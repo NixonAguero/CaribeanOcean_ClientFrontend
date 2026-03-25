@@ -19,9 +19,6 @@ export function useAboutUs() {
       setData(res);
       setLoading(false);
     });
-
-
-    
   }, []);
 
   return { data, loading };

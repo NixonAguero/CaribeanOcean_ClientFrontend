@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HomePage } from './features/home/HomePage';
-import { AboutUs } from './features/about-us/components/AboutUs';
+import AboutUs from './features/about-us/components/AboutUs';
 
 function App() {
   return (
