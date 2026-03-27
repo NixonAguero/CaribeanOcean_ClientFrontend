@@ -48,19 +48,27 @@ export interface RoomType {
 
 
 export interface BookingSearchFromProps {
-    startDate: string;
-    setStartDate: (date: string) => void;
-    endDate: string;
-    setEndDate: (date: string) => void;
-    roomType: string;
-    setRoomType: (type: string) => void;
+    filters: BookingFilters;
+    updateFilter: (field: keyof BookingFilters, value: string) => void;
     onSearch:(e:React.SubmitEvent) => void;
     hasSearched: boolean;
 }
 export interface BookingSearchResultProps {
     hasSearched: boolean;
     isRecommendation: boolean;
-    availableRooms: any[];
-    handleSelectRoom: (room: any) => void;
+    availableRooms: RoomType[];
+    handleSelectRoom: (room: RoomType) => void;
 }
 
+export interface GuestData {
+  guestName: string;
+  guestLastName: string;
+  guestEmail: string;
+  creditCard: string;
+}
+
+export interface BookingFilters {
+  startDate: string;
+  endDate: string;
+  roomType: string;
+}

@@ -3,9 +3,7 @@ import styles from './Booking.module.css'
 import type { BookingSearchFromProps } from '../types/booking.types';
 
 export const BookingSearchForm = ({
-    startDate, setStartDate,
-  endDate, setEndDate,
-  roomType, setRoomType,
+  filters, updateFilter,
   onSearch, hasSearched
 }: BookingSearchFromProps) => {
 return (
@@ -15,16 +13,16 @@ return (
         <div className={styles.datesGrid}>
           <div className={styles.inputGroup}>
             <label htmlFor="startDate">Start Date</label>
-            <input type="date" id="startDate" value={startDate} onChange={(e) => setStartDate(e.target.value)} required />
+            <input type="date" id="startDate" value={filters.startDate} onChange={(e) => updateFilter("startDate", e.target.value)} required />
           </div>
           <div className={styles.inputGroup}>
             <label htmlFor="endDate">End Date</label>
-            <input type="date" id="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)} required />
+            <input type="date" id="endDate" value={filters.endDate} onChange={(e) => updateFilter("endDate", e.target.value)} required />
           </div>
         </div>
         <div className={`${styles.inputGroup} ${styles.centered}`}>
           <label htmlFor="roomType">Room Type</label>
-          <select id="roomType" value={roomType} onChange={(e) => setRoomType(e.target.value)}>
+          <select id="roomType" value={filters.roomType} onChange={(e) => updateFilter("roomType", e.target.value)}>
             <option value="">Any Type</option>
             <option value="standard">Standard</option>
             <option value="deluxe">Deluxe</option>
