@@ -2,3 +2,65 @@ export interface Booking {
   id: string;
   name: string;
 }
+
+export const MOCK_ROOM_TYPES = [
+  {
+    id: 1, // Ahora es numérico para alinear con tu DB (Int)
+    type: "deluxe",
+    name: "Deluxe Ocean View",              // Ahora es name
+    description: "Despierta con el sonido de las olas...",
+    daily_rate: 180,                        // Ahora es daily_rate
+    image_url: "",                          // Ahora es image_url
+    bookedDates: [                          // Simulando fechas donde TODOS los de este tipo están llenos
+      { start: "2026-04-10", end: "2026-04-15" }
+    ]
+  },
+  {
+    id: 2,
+    type: "suite",
+    name: "Presidential Suite",
+    description: "Nuestra suite más lujosa...",
+    daily_rate: 350,
+    image_url: "",
+    bookedDates: [
+      { start: "2026-04-12", end: "2026-04-20" }
+    ]
+  },
+  {
+    id: 3,
+    type: "standard",
+    name: "Standard Garden Queen",
+    description: "Una habitación acogedora...",
+    daily_rate: 120,
+    image_url: "",
+    bookedDates: [] 
+  }
+];
+
+export interface RoomType {
+  id: number;
+  type: string;
+  name: string;
+  description: string;
+  daily_rate: number;
+  image_url: string;
+}
+
+
+export interface BookingSearchFromProps {
+    startDate: string;
+    setStartDate: (date: string) => void;
+    endDate: string;
+    setEndDate: (date: string) => void;
+    roomType: string;
+    setRoomType: (type: string) => void;
+    onSearch:(e:React.SubmitEvent) => void;
+    hasSearched: boolean;
+}
+export interface BookingSearchResultProps {
+    hasSearched: boolean;
+    isRecommendation: boolean;
+    availableRooms: any[];
+    handleSelectRoom: (room: any) => void;
+}
+

@@ -1,8 +1,11 @@
+import AboutUs from "../about-us/components/AboutUs";
+import Hero from "../hero/components/Hero";
 
 export const HomePage = () => {
   return (
     <main>
-      <h1>Home</h1>
+      <Hero />
+      <AboutUs />
     </main>
   );
 };
