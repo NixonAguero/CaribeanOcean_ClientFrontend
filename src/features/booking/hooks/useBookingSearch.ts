@@ -17,9 +17,9 @@ export const useBookingSearch = () => {
   const [hasSearched, setHasSearched] = useState(false);
   const [availableRooms, setAvailableRooms] = useState<RoomType[]>([]);
   const [isRecommendation, setIsRecommendation] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-
-const updateFilter = (field: keyof BookingFilters, value: string) => {
+  const updateFilter = (field: keyof BookingFilters, value: string) => {
     setFilters((prev) => ({
       ...prev,
       [field]: value,
@@ -31,11 +31,14 @@ const updateFilter = (field: keyof BookingFilters, value: string) => {
     e.preventDefault();
     setHasSearched(true);
     setIsRecommendation(false);
+    setError(null);
     if (new Date(filter.startDate) >= new Date(filter.endDate)) {
-      alert("Error: Return date must be strictly after Start date.");
+      setError("Oops! It looks like your check-out date is before your arrival. Please adjust your dates so we can find your perfect room.");
       setAvailableRooms([]);
       return;
     }
+    // (Aquí en el futuro iría tu Try/Catch con tu fetch a la API)
+    // catch (e) { setError("We couldn't connect to our servers. Please try again.") }
     let results = MOCK_ROOM_TYPES;
     if (filter.roomType) {
       results = results.filter((room) => room.type === filter.roomType);
@@ -61,6 +64,7 @@ const updateFilter = (field: keyof BookingFilters, value: string) => {
     setHasSearched(false);
     setAvailableRooms([]);
     setIsRecommendation(false);
+    setError(null);
     setFilters({
       startDate: "",
       endDate: "",
@@ -68,7 +72,7 @@ const updateFilter = (field: keyof BookingFilters, value: string) => {
     });
   };
   return {
-    state: { filter, hasSearched, availableRooms, isRecommendation },
+    state: { filter, hasSearched, availableRooms, isRecommendation, error },
     actions: { updateFilter, handleSearch, resetSearch }
   };
 };

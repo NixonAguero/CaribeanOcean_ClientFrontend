@@ -33,7 +33,7 @@ export const MOCK_ROOM_TYPES = [
     description: "Una habitación acogedora...",
     daily_rate: 120,
     image_url: "",
-    bookedDates: [] 
+    bookedDates: []
   }
 ];
 
@@ -48,16 +48,17 @@ export interface RoomType {
 
 
 export interface BookingSearchFromProps {
-    filters: BookingFilters;
-    updateFilter: (field: keyof BookingFilters, value: string) => void;
-    onSearch:(e:React.SubmitEvent) => void;
-    hasSearched: boolean;
+  filters: BookingFilters;
+  updateFilter: (field: keyof BookingFilters, value: string) => void;
+  onSearch: (e: React.SubmitEvent) => void;
+  hasSearched: boolean;
+  error: string | null;
 }
 export interface BookingSearchResultProps {
-    hasSearched: boolean;
-    isRecommendation: boolean;
-    availableRooms: RoomType[];
-    handleSelectRoom: (room: RoomType) => void;
+  hasSearched: boolean;
+  isRecommendation: boolean;
+  availableRooms: RoomType[];
+  handleSelectRoom: (room: RoomType) => void;
 }
 
 export interface GuestData {

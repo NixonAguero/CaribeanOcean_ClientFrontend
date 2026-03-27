@@ -46,13 +46,16 @@ export const Booking = () => {
         updateFilter={search.actions.updateFilter}
         onSearch={search.actions.handleSearch}
         hasSearched={search.state.hasSearched}
+        error={search.state.error}
       />
-      <BookingSearchResults
-        hasSearched={search.state.hasSearched}
-        isRecommendation={search.state.isRecommendation}
-        availableRooms={search.state.availableRooms}
-        handleSelectRoom={checkout.actions.handleSelectRoom}
-      />
+      {search.state.hasSearched && !search.state.error && (
+        <BookingSearchResults
+          hasSearched={search.state.hasSearched}
+          isRecommendation={search.state.isRecommendation}
+          availableRooms={search.state.availableRooms}
+          handleSelectRoom={(room) => checkout.actions.handleSelectRoom(room)}
+        />
+      )}
     </div>
   );
 };
