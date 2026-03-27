@@ -1,4 +1,5 @@
 import type { Hero } from "../types/hero.types";
+//import apiClient from "../../../shared/services/apiClient.ts";
 
 export async function getHero(): Promise<Hero> {
   //const response = await apiClient.get("/hero");
