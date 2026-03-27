@@ -1,4 +1,4 @@
-import type { AboutUsGallery } from "../types/AboutUsGallery";
+import type { AboutUsGallery } from "../types/gallery.type";
 import { useState } from 'react';
 
 interface GalleryProps {
@@ -6,7 +6,7 @@ interface GalleryProps {
     styles: Record<string, string>;
 }
 
-export default function Gallery({ gallery, styles }: GalleryProps)   {
+export default function Gallery({ gallery, styles }: GalleryProps) {
 
     const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
 
@@ -17,16 +17,16 @@ export default function Gallery({ gallery, styles }: GalleryProps)   {
 
     return (
         <div className={styles.aboutUsGallery}>
-            <img 
-                src={mainImage.image} 
-                alt={mainImage.description} 
-                className={styles.galleryImage} 
+            <img
+                src={mainImage.image}
+                alt={mainImage.description}
+                className={styles.galleryImage}
             />
             {thumbnails.map((img) => (
-                <img 
-                    src={img.image} 
-                    alt={img.description} 
-                    key={img.id} 
+                <img
+                    src={img.image}
+                    alt={img.description}
+                    key={img.id}
                     className={`${styles.galleryImage} ${styles.galleryThumb}`}
                     onClick={() => setSelectedImageId(img.id)}
                 />
