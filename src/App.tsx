@@ -11,6 +11,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/booking" element={<Booking />} />
+        <Route path="/offers" element={<Offers />} />
         <Route path="*" element={<div>Página no encontrada</div>} />
       </Routes>
     </BrowserRouter>
