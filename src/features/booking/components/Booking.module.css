@@ -514,3 +514,106 @@
 }
 
 
+/* --------------------------------------
+   ESTILOS RESPONSIVOS (Mobile & Tablet)
+----------------------------------------- */
+@media (max-width: 768px) {
+  /* Títulos adaptables */
+  .title, 
+  .checkoutHeader h3, 
+  .successTitle {
+    font-size: 1.8rem;
+  }
+
+  /* 1. Formulario de Búsqueda (Hero & Card) */
+  .searchHero {
+    padding: 3rem 1rem;
+  }
+  
+  .card {
+    padding: 2rem 1.5rem;
+  }
+
+  .datesGrid {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .inputGroup.centered {
+    max-width: 100%;
+  }
+
+  /* 2. Resultados de Búsqueda (Tarjetas de cuartos) */
+  .resultsSection {
+    padding: 2rem 1rem;
+  }
+
+  .roomCard {
+    flex-direction: column; /* Apila la imagen y el texto verticalmente */
+  }
+
+  .roomImagePlaceholder, 
+  .roomImage {
+    width: 100%;
+    height: 220px;
+  }
+
+  .roomContent {
+    padding: 1.25rem;
+  }
+
+  .roomHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .roomPrice {
+    align-self: flex-start;
+  }
+
+  .bookButton {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* 3. Formulario de Checkout (Datos de usuario) */
+  .checkoutHero, 
+  .bookingWrapper {
+    padding: 2rem 1rem;
+  }
+
+  .checkoutContainer {
+    padding: 2rem 1.5rem;
+  }
+
+  .checkoutFormGrid {
+    grid-template-columns: 1fr; /* Pasa de 2 columnas a 1 columna */
+    gap: 1.25rem;
+  }
+
+  .checkoutActions {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .cancelButton, 
+  .acceptButton {
+    width: 100%;
+  }
+
+  /* 4. Vista de Éxito */
+  .successContainer {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .successIcon {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+}
+
+
+
