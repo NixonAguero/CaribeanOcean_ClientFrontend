@@ -1,6 +1,6 @@
 //import apiClient from "../../../shared/services/apiClient";
 import type { AboutUs } from "../types/aboutUs.types";
-import type { AboutUsGallery } from "../types/AboutUsGallery";
+import type { AboutUsGallery } from "../types/gallery.type";
 
 export async function getAboutUs(): Promise<{ aboutUs: AboutUs, gallery: AboutUsGallery[] }> {
   //const aboutUs = await apiClient.get("/about-us");
@@ -53,6 +53,6 @@ export async function getAboutUs(): Promise<{ aboutUs: AboutUs, gallery: AboutUs
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
     }
   ];
-  
+
   return { aboutUs: data, gallery };
 }

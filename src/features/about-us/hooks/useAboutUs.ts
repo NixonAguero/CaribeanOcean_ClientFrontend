@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { getAboutUs } from "../services/aboutUs.service";
 import type { AboutUs } from "../types/aboutUs.types";
-import type { AboutUsGallery } from "../types/AboutUsGallery";
+import type { AboutUsGallery } from "../types/gallery.type";
 
 export function useAboutUs() {
-  
+
   const [data, setData] = useState<{ aboutUs: AboutUs, gallery: AboutUsGallery[] }>({
     aboutUs: {
       id: "",
