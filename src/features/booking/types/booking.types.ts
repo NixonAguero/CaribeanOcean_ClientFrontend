@@ -73,3 +73,23 @@ export interface BookingFilters {
   endDate: string;
   roomType: string;
 }
+
+
+
+export interface BookingRequestDto {
+  roomId: number;     
+  checkInDate: string;  
+  checkOutDate: string;
+  guest: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    creditCard: string;
+  };
+}
+
+export interface BookingResponseDto {
+  confirmationCode: string;
+  status: string;
+}
+
