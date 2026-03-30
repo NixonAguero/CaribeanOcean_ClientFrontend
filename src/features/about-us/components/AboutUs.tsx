@@ -11,7 +11,7 @@ export default function AboutUs() {
   if (!data) return null;
 
   return (
-    <section className={styles.aboutSection}>
+    <section className="sections">
       <AboutUsText description={data.description}/>
       <Gallery gallery = {data.gallery} />
     </section>
