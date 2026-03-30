@@ -1,36 +1,18 @@
-import type { AboutUsGallery } from "../types/gallery.type";
-import { useState } from 'react';
+import type { GalleryProps } from "../types/aboutUs.props";
+import styles from "../styles/AboutUs.module.css";
+import MainImage from "./MainImage";
+import Thumbnails from "./Thumbnails";
+import { useGallery } from "../hooks/useGallery";
 
-interface GalleryProps {
-    gallery: AboutUsGallery[];
-    styles: Record<string, string>;
-}
+export default function Gallery( { gallery }: GalleryProps ) {
 
-export default function Gallery({ gallery, styles }: GalleryProps) {
-
-    const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
-
-    const mainImage = gallery.find(img => img.id === selectedImageId) || gallery[0];
-    const thumbnails = gallery.filter(img => img.id !== mainImage?.id);
-
-    if (gallery.length === 0) return null;
+    if (gallery.images.length === 0) return null;
+    const {mainImage, thumbnails, setSelectedImageId} = useGallery(gallery);
 
     return (
         <div className={styles.aboutUsGallery}>
-            <img
-                src={mainImage.image}
-                alt={mainImage.description}
-                className={styles.galleryImage}
-            />
-            {thumbnails.map((img) => (
-                <img
-                    src={img.image}
-                    alt={img.description}
-                    key={img.id}
-                    className={`${styles.galleryImage} ${styles.galleryThumb}`}
-                    onClick={() => setSelectedImageId(img.id)}
-                />
-            ))}
+            <MainImage image = {mainImage}/>
+            <Thumbnails images={thumbnails} onSelect={setSelectedImageId}/>
         </div>
     );
 }

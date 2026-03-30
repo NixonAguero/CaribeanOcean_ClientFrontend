@@ -1,25 +1,20 @@
 import { useEffect, useState } from "react";
 import { getAboutUs } from "../services/aboutUs.service";
 import type { AboutUs } from "../types/aboutUs.types";
-import type { AboutUsGallery } from "../types/gallery.type";
 
 export function useAboutUs() {
 
-  const [data, setData] = useState<{ aboutUs: AboutUs, gallery: AboutUsGallery[] }>({
-    aboutUs: {
-      id: "",
-      description: ""
-    },
-    gallery: []
-  });
+  const [data, setData] = useState<AboutUs>();
   const [loading, setLoading] = useState(true);
 
+  const [error, setError] = useState<Error | null>();
+
   useEffect(() => {
-    getAboutUs().then((res) => {
-      setData(res);
-      setLoading(false);
-    });
+    getAboutUs()
+      .then((res) => setData(res))
+      .catch((error) => setError(error))
+      .finally(() => setLoading(false))
   }, []);
 
-  return { data, loading };
+  return { data, loading, error };
 }
