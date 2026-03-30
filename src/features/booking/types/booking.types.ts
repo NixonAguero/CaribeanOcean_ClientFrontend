@@ -53,6 +53,7 @@ export interface BookingSearchFromProps {
   onSearch: (e: React.SubmitEvent) => void;
   hasSearched: boolean;
   error: string | null;
+  isLoading: boolean;
 }
 export interface BookingSearchResultProps {
   hasSearched: boolean;
