@@ -3,6 +3,7 @@ import { HomePage } from './features/home/HomePage';
 import { Booking } from './features/booking/components/Booking';
 import AboutUs from './features/about-us/components/AboutUs';
 import Offers from './features/offers/components/Offers';
+import { RoomsPage } from './features/rooms/RoomsPage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/booking" element={<Booking />} />
         <Route path="/offers" element={<Offers />} />
         <Route path="*" element={<div>Página no encontrada</div>} />
+        <Route path="/rooms" element={<RoomsPage />} />
       </Routes>
     </BrowserRouter>
   );

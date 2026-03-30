@@ -1,15 +1,16 @@
 import { useRooms } from "./hooks/useRooms";
 import { Rooms } from "./components/Rooms";
+import { Footer } from "../../app/layout/Footer/Footer";
 
 export const RoomsPage = () => {
-  const { data, loading } = useRooms();
-
-  if (loading) return <p>Cargando...</p>;
+  const { data } = useRooms();
 
   return (
-    <main>
-      <h1>Rooms</h1>
-      <Rooms data={data} />
-    </main>
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      <main style={{ flex: 1 }}>
+        <Rooms data={data} />
+      </main>
+      <Footer />
+    </div>
   );
 };

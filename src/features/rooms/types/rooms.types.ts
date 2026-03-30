@@ -1,4 +1,7 @@
-export interface Rooms {
+export interface Room {
   id: string;
-  name: string;
+  title: string;
+  price: number;
+  image: string;
+  features: string[];
 }

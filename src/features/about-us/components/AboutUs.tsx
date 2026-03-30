@@ -1,24 +1,19 @@
 import styles from "../styles/AboutUs.module.css";
 import { useAboutUs } from "../hooks/useAboutUs";
 import Gallery from "./Gallery";
+import AboutUsText from "./AboutUsText";
 
 export default function AboutUs() {    
-  const { data, loading } = useAboutUs();
+  const { data, loading, error } = useAboutUs();
 
-  if (loading || !data) {
-    return <div className={styles.loading}>The Caribbean Ocean Resort & Spa</div>;
-  }
+  if(loading) return <div className={styles.loading}>Loading...</div>;
+  if (error) return <div className={styles.error}>Something went wrong. Please try again.</div>;
+  if (!data) return null;
 
   return (
     <section className={styles.aboutSection}>
-      <div className={styles.textColumn}>
-        <h1 className={styles.aboutTitle}>ABOUT US</h1>
-        <div className="decorative-line"></div>
-        <span className="text-hero-subtitle">The Caribbean Ocean Resort & Spa</span>
-        <p className={styles.description}>{data.aboutUs.description}</p>
-      </div>
-
-      <Gallery gallery={data.gallery} styles={styles} />
+      <AboutUsText description={data.description}/>
+      <Gallery gallery = {data.gallery} />
     </section>
   );
 };
