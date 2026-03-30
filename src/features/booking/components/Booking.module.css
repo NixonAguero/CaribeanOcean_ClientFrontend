@@ -472,5 +472,148 @@
   background-attachment: fixed; /* Opcional: Da un efecto visual muy lindo al hacer scroll */
 }
 
+/* --------------------------------------
+   ESTILOS DE ERROR GLOBAL (Refinado)
+----------------------------------------- */
+.errorMessageContainer {
+  width: 100%;
+  /* Un rojo hiper suave (10% de opacidad) que no asusta */
+  background-color: rgba(239, 68, 68, 0.08); 
+  /* Diseño moderno: Solo borde a la izquierda, sin cajita de bordes pesada */
+  border-left: 4px solid #ef4444; 
+  color: #991b1b;
+  padding: 1rem 1.5rem;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-weight: 400;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.05);
+  
+  /* Animación suave al aparecer */
+  animation: slideDownFade 0.3s ease-out;
+}
+.errorIcon {
+  font-size: 1.25rem;
+  /* Subimos el ícono un poquito para que alinee perfecto con el texto de múltiples líneas */
+  margin-top: -2px; 
+}
+/* Micro-interacción: Que baje y aparezca suavemente */
+@keyframes slideDownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* --------------------------------------
+   ESTILOS RESPONSIVOS (Mobile & Tablet)
+----------------------------------------- */
+@media (max-width: 768px) {
+  /* Títulos adaptables */
+  .title, 
+  .checkoutHeader h3, 
+  .successTitle {
+    font-size: 1.8rem;
+  }
+
+  /* 1. Formulario de Búsqueda (Hero & Card) */
+  .searchHero {
+    padding: 3rem 1rem;
+  }
+  
+  .card {
+    padding: 2rem 1.5rem;
+  }
+
+  .datesGrid {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .inputGroup.centered {
+    max-width: 100%;
+  }
+
+  /* 2. Resultados de Búsqueda (Tarjetas de cuartos) */
+  .resultsSection {
+    padding: 2rem 1rem;
+  }
+
+  .roomCard {
+    flex-direction: column; /* Apila la imagen y el texto verticalmente */
+  }
+
+  .roomImagePlaceholder, 
+  .roomImage {
+    width: 100%;
+    height: 220px;
+  }
+
+  .roomContent {
+    padding: 1.25rem;
+  }
+
+  .roomHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .roomPrice {
+    align-self: flex-start;
+  }
+
+  .bookButton {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* 3. Formulario de Checkout (Datos de usuario) */
+  .checkoutHero, 
+  .bookingWrapper {
+    padding: 2rem 1rem;
+  }
+
+  .checkoutContainer {
+    padding: 2rem 1.5rem;
+  }
+
+  .checkoutFormGrid {
+    grid-template-columns: 1fr; /* Pasa de 2 columnas a 1 columna */
+    gap: 1.25rem;
+  }
+
+  .checkoutActions {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .cancelButton, 
+  .acceptButton {
+    width: 100%;
+  }
+
+  /* 4. Vista de Éxito */
+  .successContainer {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .successIcon {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+}
+
 
 

@@ -1,32 +1,47 @@
 import { useState } from "react";
 // Aquí debe ir la Interfaz RoomType y el objeto MOCK_ROOM_TYPES que armamos antes
-import { type RoomType, MOCK_ROOM_TYPES } from "../types/booking.types"; // (Sugiero guardar esos mocks/interfaces en una carpeta types/)
+import { type RoomType, MOCK_ROOM_TYPES, type BookingFilters } from "../types/booking.types"; // (Sugiero guardar esos mocks/interfaces en una carpeta types/)
+import { isDateRangeOverlapping } from "../utils/date.utils";
+
+
+
+
 export const useBookingSearch = () => {
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [roomType, setRoomType] = useState("");
+  const [filter, setFilters] = useState<BookingFilters>({
+    startDate: "",
+    endDate: "",
+    roomType: "",
+  })
+
+
   const [hasSearched, setHasSearched] = useState(false);
   const [availableRooms, setAvailableRooms] = useState<RoomType[]>([]);
   const [isRecommendation, setIsRecommendation] = useState(false);
-  const isOverlapping = (userStart: string, userEnd: string, bookedStart: string, bookedEnd: string) => {
-    const s1 = new Date(userStart).getTime();
-    const e1 = new Date(userEnd).getTime();
-    const s2 = new Date(bookedStart).getTime();
-    const e2 = new Date(bookedEnd).getTime();
-    return s1 < e2 && s2 < e1;
+  const [error, setError] = useState<string | null>(null);
+
+  const updateFilter = (field: keyof BookingFilters, value: string) => {
+    setFilters((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
   };
-  const handleSearch = (e: React.FormEvent) => {
+
+
+  const handleSearch = (e: React.SubmitEvent) => {
     e.preventDefault();
     setHasSearched(true);
     setIsRecommendation(false);
-    if (new Date(startDate) >= new Date(endDate)) {
-      alert("Error: Return date must be strictly after Start date.");
+    setError(null);
+    if (new Date(filter.startDate) >= new Date(filter.endDate)) {
+      setError("Oops! It looks like your check-out date is before your arrival. Please adjust your dates so we can find your perfect room.");
       setAvailableRooms([]);
       return;
     }
+    // (Aquí en el futuro iría tu Try/Catch con tu fetch a la API)
+    // catch (e) { setError("We couldn't connect to our servers. Please try again.") }
     let results = MOCK_ROOM_TYPES;
-    if (roomType) {
-      results = results.filter((room) => room.type === roomType);
+    if (filter.roomType) {
+      results = results.filter((room) => room.type === filter.roomType);
       if (results.length === 0) {
         setIsRecommendation(true);
         results = MOCK_ROOM_TYPES;
@@ -34,7 +49,7 @@ export const useBookingSearch = () => {
     }
     const availableByDate = results.filter((room) => {
       return !room.bookedDates.some((booking) =>
-        isOverlapping(startDate, endDate, booking.start, booking.end)
+        isDateRangeOverlapping(filter.startDate, filter.endDate, booking.start, booking.end)
       );
     });
     results = availableByDate;
@@ -48,12 +63,16 @@ export const useBookingSearch = () => {
   const resetSearch = () => {
     setHasSearched(false);
     setAvailableRooms([]);
-    setStartDate("");
-    setEndDate("");
-    setRoomType("");
+    setIsRecommendation(false);
+    setError(null);
+    setFilters({
+      startDate: "",
+      endDate: "",
+      roomType: "",
+    });
   };
   return {
-    state: { startDate, endDate, roomType, hasSearched, availableRooms, isRecommendation },
-    actions: { setStartDate, setEndDate, setRoomType, handleSearch, resetSearch }
+    state: { filter, hasSearched, availableRooms, isRecommendation, error },
+    actions: { updateFilter, handleSearch, resetSearch }
   };
 };

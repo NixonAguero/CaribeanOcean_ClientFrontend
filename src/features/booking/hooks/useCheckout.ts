@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { type RoomType } from "../types/booking.types"; 
+import { type RoomType, type GuestData } from "../types/booking.types"; 
+
 
 export const useCheckout = () => {
   const [selectedRoom, setSelectedRoom] = useState<RoomType | null>(null);
-  const [guestName, setGuestName] = useState("");
-  const [guestLastName, setGuestLastName] = useState("");
-  const [guestEmail, setGuestEmail] = useState("");
-  const [creditCard, setCreditCard] = useState("");
+  const [guestData, setGuestData] = useState({
+    guestName: "",
+    guestLastName: "",
+    guestEmail: "",
+    creditCard: "",
+  });
 
   const [bookingComplete, setBookingComplete] = useState(false);
   const [reservationCode, setReservationCode] = useState("");
@@ -15,12 +18,19 @@ export const useCheckout = () => {
     setSelectedRoom(room);
   };
 
+  const updateGuestField = (field: keyof GuestData, value: string) => {
+  setGuestData((prev) => ({
+    ...prev,
+    [field]: value,
+  }));
+};
+
   const handleCancelBooking = () => {
     setSelectedRoom(null);
   };
 
   // Necesitamos pasarle las fechas de la búsqueda para mandar el JSON completo al backend
-  const handleAcceptBooking = (e: React.FormEvent, startDate: string, endDate: string) => {
+  const handleAcceptBooking = (e: React.SubmitEvent, startDate: string, endDate: string) => {
     e.preventDefault();
     
     // Aquí es donde mandaremos a tu Backend cuando esté construido:
@@ -28,7 +38,7 @@ export const useCheckout = () => {
       room_type_id: selectedRoom?.id,
       start_date: startDate,
       end_date: endDate,
-      guest_data: { name: guestName, last_name: guestLastName, email: guestEmail, credit_card: creditCard }
+      guest_data: { name: guestData.guestName, last_name: guestData.guestLastName, email: guestData.guestEmail, credit_card: guestData.creditCard }
     };
     console.log("Enviando al Backend:", reservationPayload);
     
@@ -39,14 +49,16 @@ export const useCheckout = () => {
   const resetCheckout = () => {
     setBookingComplete(false);
     setSelectedRoom(null);
-    setGuestName("");
-    setGuestLastName("");
-    setGuestEmail("");
-    setCreditCard("");
+    setGuestData({
+      guestName: "",
+      guestLastName: "",
+      guestEmail: "",
+      creditCard: "",
+    });
   };
 
   return {
-    state: { selectedRoom, guestName, guestLastName, guestEmail, creditCard, bookingComplete, reservationCode },
-    actions: { handleSelectRoom, handleCancelBooking, handleAcceptBooking, resetCheckout, setGuestName, setGuestLastName, setGuestEmail, setCreditCard }
+    state: { selectedRoom, guestData, bookingComplete, reservationCode },
+    actions: { handleSelectRoom, handleCancelBooking, handleAcceptBooking, resetCheckout, updateGuestField }
   };
 };

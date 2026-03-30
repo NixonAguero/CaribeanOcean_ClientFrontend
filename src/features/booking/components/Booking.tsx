@@ -18,8 +18,8 @@ export const Booking = () => {
   if (checkout.state.bookingComplete) {
     return (
       <BookingSuccess
-        guestName={checkout.state.guestName}
-        guestLastName={checkout.state.guestLastName}
+        guestName={checkout.state.guestData.guestName}
+        guestLastName={checkout.state.guestData.guestLastName}
         roomName={checkout.state.selectedRoom?.name || ""}
         reservationCode={checkout.state.reservationCode}
         onClose={handleFullReset}
@@ -31,12 +31,9 @@ export const Booking = () => {
     return (
       <CheckoutForm
         selectedRoom={checkout.state.selectedRoom}
-        guestName={checkout.state.guestName} setGuestName={checkout.actions.setGuestName}
-        guestLastName={checkout.state.guestLastName} setGuestLastName={checkout.actions.setGuestLastName}
-        guestEmail={checkout.state.guestEmail} setGuestEmail={checkout.actions.setGuestEmail}
-        creditCard={checkout.state.creditCard} setCreditCard={checkout.actions.setCreditCard}
-
-        onAccept={(e) => checkout.actions.handleAcceptBooking(e, search.state.startDate, search.state.endDate)}
+        guestData={checkout.state.guestData}
+        updateGuestField={checkout.actions.updateGuestField}
+        onAccept={(e) => checkout.actions.handleAcceptBooking(e, search.state.filter.startDate, search.state.filter.endDate)}
         onCancel={checkout.actions.handleCancelBooking}
       />
     );
@@ -45,18 +42,20 @@ export const Booking = () => {
   return (
     <div className={styles.pageContainer}>
       <BookingSearchForm
-        startDate={search.state.startDate} setStartDate={search.actions.setStartDate}
-        endDate={search.state.endDate} setEndDate={search.actions.setEndDate}
-        roomType={search.state.roomType} setRoomType={search.actions.setRoomType}
+        filters={search.state.filter}
+        updateFilter={search.actions.updateFilter}
         onSearch={search.actions.handleSearch}
         hasSearched={search.state.hasSearched}
+        error={search.state.error}
       />
-      <BookingSearchResults
-        hasSearched={search.state.hasSearched}
-        isRecommendation={search.state.isRecommendation}
-        availableRooms={search.state.availableRooms}
-        handleSelectRoom={checkout.actions.handleSelectRoom}
-      />
+      {search.state.hasSearched && !search.state.error && (
+        <BookingSearchResults
+          hasSearched={search.state.hasSearched}
+          isRecommendation={search.state.isRecommendation}
+          availableRooms={search.state.availableRooms}
+          handleSelectRoom={(room) => checkout.actions.handleSelectRoom(room)}
+        />
+      )}
     </div>
   );
 };

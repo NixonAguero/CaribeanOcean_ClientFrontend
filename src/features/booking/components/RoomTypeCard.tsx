@@ -1,4 +1,4 @@
-import React from 'react';
+
 import styles from './Booking.module.css';
 import type { RoomType } from '../types/booking.types';
 
