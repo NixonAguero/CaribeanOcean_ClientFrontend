@@ -33,7 +33,7 @@ export default function Hero() {
         <span className={styles.tagline}>Where the jungle meets the sea</span>
         <h1 className={styles.title}>{hero.title}</h1>
         <p className={styles.description}>{hero.description}</p>
-        <a href="#rooms" className={styles.ctaButton}>
+        <a href="/rooms" className={styles.ctaButton}>
           Explore Our Rooms
         </a>
       </div>

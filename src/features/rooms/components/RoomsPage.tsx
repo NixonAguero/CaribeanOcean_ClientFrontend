@@ -1,5 +1,5 @@
 import { useRooms } from "../hooks/useRooms";
-import { Rooms } from "../components/Rooms";
+import { Rooms } from "./Rooms";
 
 export const RoomsPage = () => {
   const { data } = useRooms();
