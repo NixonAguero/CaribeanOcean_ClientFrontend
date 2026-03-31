@@ -1,4 +1,4 @@
-import type { Offer } from "../types/offer.type";
+import type { Offer } from "../types/offers.type";
 import OfferButton from "./OfferButton";
 import styles from "../styles/Offers.module.css";
 

@@ -1,9 +1,10 @@
 import { useResponsiveItems } from './useResponsiveItems';
 import { usePagination } from './usePagination';
+import type { OfferCarruselProps } from "../types/offers.props";
 
-export function useCarousel<T>(items: T[] | undefined) {
+export function useCarousel({offers} : OfferCarruselProps) {
   const itemsToShow = useResponsiveItems(3);
-  const safeItems = items || [];
+  const safeItems = offers || [];
   
   const { currentIndex, next, prev } = usePagination(safeItems.length, itemsToShow);
 

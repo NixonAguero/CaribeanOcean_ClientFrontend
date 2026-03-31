@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Offer } from "../types/offer.type";
+import type { Offer } from "../types/offers.type";
 import { getOffers } from "../services/offers.service";
 
 export function useOffers() {
