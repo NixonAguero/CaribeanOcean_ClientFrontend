@@ -1,13 +1,17 @@
-import styles from "./Facilities.module.css";
+import { GrMapLocation } from "react-icons/gr";
 
-interface Props {
-  data?: any;
-}
+export default function Facilities() {
 
-export const Facilities = ({ data }: Props) => {
   return (
-    <div className={styles.container}>
-      <h2>Facilities</h2>
-    </div>
-  );
-};
+    <section className="sections">
+      <div>
+        <h1 className="title">a</h1>
+        <span className="subtitle"><GrMapLocation /></span>
+        <p className="description">b</p>
+      </div>
+      <div>
+        
+      </div>
+    </section>
+  )
+}

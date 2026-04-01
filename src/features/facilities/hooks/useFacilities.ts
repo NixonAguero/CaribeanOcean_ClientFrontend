@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { getFacilities } from "../services/facilities.service";
+import type { Facility } from "../types/facilities.types";
+import { getFacility } from "../services/facilities.service";
 
 export function useFacilities() {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<Facility>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getFacilities().then((res) => {
+    getFacility({ numberOfItems: 3 })
+    .then((res) => {
       setData(res);
       setLoading(false);
     });
