@@ -2,7 +2,9 @@ export interface Hero {
   id: string;
   title: string;
   description: string;
-  images: {
-    url: string;
-  }[];
+  images: HeroImage[];
+}
+
+export type HeroImage = {
+  url : string
 }

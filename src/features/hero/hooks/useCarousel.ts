@@ -2,13 +2,14 @@ import { useAutoAdvance } from "./useAutoAdvance";
 import { useSlideNavigation } from "./useSlideNavigation";
 
 export function useCarousel(totalSlides: number, slideInterval: number = 4000) {
+
   const { currentSlide, goToSlide: baseGoToSlide, prevSlide: basePrevSlide, nextSlide: baseNextSlide } = useSlideNavigation(totalSlides);
 
   const restartAutoAdvance = useAutoAdvance(baseNextSlide, slideInterval, totalSlides > 1);
 
   const goToSlide = (index: number) => {
     baseGoToSlide(index);
-    restartAutoAdvance()
+    restartAutoAdvance();
   }
 
   const prevSlide = () => {
@@ -17,7 +18,7 @@ export function useCarousel(totalSlides: number, slideInterval: number = 4000) {
   }
 
   const nextSlide = () => {
-    basePrevSlide();
+    baseNextSlide();
     restartAutoAdvance();
   }
 
