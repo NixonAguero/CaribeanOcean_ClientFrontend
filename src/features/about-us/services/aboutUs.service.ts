@@ -36,7 +36,7 @@ export async function getAboutUs(): Promise<AboutUs> {
       },
       {
         id: "6",
-        url: "https://www.margaritaycoche.com/images/gallery/196/grandes/vista_aerea_sunsol_isla_caribe_1.jpg",
+        url: "https://i0.wp.com/foodandpleasure.com/wp-content/uploads/2021/04/hoteles-en-playa-del-carmen-magicblue.jpeg?fit=1280%2C855&ssl=1",
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
       },
       {
