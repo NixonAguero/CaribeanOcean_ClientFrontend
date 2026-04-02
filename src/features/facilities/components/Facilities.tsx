@@ -13,6 +13,7 @@ export default function Facilities() {
   return (
     <section className="sections">
       <h1 className="title">{data?.title}</h1>
+      <div className="decorative-line"></div>
       <p className="description">{data?.description}</p>
       <div>
         <FacilitiesList facilities={data?.facilities} />
