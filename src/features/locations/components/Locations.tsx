@@ -31,7 +31,7 @@ export default function Locations() {
         </div>
         <div className={styles.footerMap}>
           <div>
-            <p className=''><MdOutlineLocationOn /> Cocles, Talamanca, Costa Rica</p>
+            <p className=''><MdOutlineLocationOn /> Puerto Viejo, Talamanca, Costa Rica</p>
           </div>
           <div className={styles.iconsGroup}>
             <a
