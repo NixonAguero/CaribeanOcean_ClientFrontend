@@ -1,18 +1,30 @@
-import type { GalleryProps } from "../types/gallery.props";
 import styles from "../styles/AboutUs.module.css";
-import MainImage from "./MainImage";
-import Thumbnails from "./Thumbnails";
 import { useGallery } from "../hooks/useGallery";
 
-export default function Gallery( { gallery }: GalleryProps ) {
+export default function Gallery() {
 
-    if (gallery.images.length === 0) return null;
-    const {mainImage, thumbnails, setSelectedImageId} = useGallery(gallery);
+    // if (gallery.images.length === 0) return null;
+    const {imgs, mainImage, setSelectedImageId} = useGallery();
 
     return (
         <div className={styles.aboutUsGallery}>
-            <MainImage image = {mainImage}/>
-            <Thumbnails images={thumbnails} onSelect={setSelectedImageId}/>
+            <img
+                src={mainImage?.url}
+                alt={mainImage?.description}
+                loading='lazy'
+                className={styles.galleryImage}
+            />
+            <>
+                {imgs?.map(img => 
+                    <img 
+                        src={img.url}
+                        alt={img.description}
+                        loading='lazy'
+                        className={`${styles.galleryImage} ${styles.galleryThumb}`}
+                        onClick={() => setSelectedImageId(img.id)}
+                    />
+                )}
+            </>
         </div>
     );
 }

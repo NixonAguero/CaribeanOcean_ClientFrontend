@@ -7,9 +7,3 @@ export interface GalleryImage {
 export type Gallery = {
   images: GalleryImage[];
 }
-
-export interface AboutUs {
-  id: string;
-  description: string;
-  gallery: {images : GalleryImage[]};
-}

@@ -1,14 +1,11 @@
 //import apiClient from "../../../shared/services/apiClient";
-import type { AboutUs } from "../types/gallery.types";
+import type { GalleryImage } from "../types/gallery.types";
 
-export async function getAboutUs(): Promise<AboutUs> {
+export async function getGalleryImages(): Promise<GalleryImage[]> {
   //const aboutUs = await apiClient.get("/about-us");
 
-  const data: AboutUs = {
-    id: "1",
-    description: "The Caribbean Ocean Resort & Spa was born from the dream of creating a space where visitors could experience the essence of the Costa Rican Caribbean without sacrificing comfort and luxury. Founded in 2008 by a Costa Rican family passionate about sustainable tourism, we have grown to become one of the most renowned resorts in the Caribbean region. We offer 48 rooms distributed among beachfront villas and bungalows, a world-class spa, three themed restaurants, infinity pools, and direct access to a private beach. All our staff are local, trained to the highest standards of hospitality, and committed to providing personalized attention to each guest. We deeply believe in responsible tourism. Therefore, more than 80% of the products we use in our kitchen and spa come from local and organic suppliers, and we hold ICT Sustainable Tourism certification (Level 4).",
-    gallery: {
-      images: [
+  const data: GalleryImage[] =
+    [
       {
         id: "1",
         url: "https://static.hosteltur.com/app/public/uploads/img/articles/2014/09/01/S_5b14f78cdbe07_shutterstock_hotelcaribe.jpg",
@@ -49,9 +46,7 @@ export async function getAboutUs(): Promise<AboutUs> {
         url: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/00/57/e2/pc-bungalow-suite.jpg?w=400&h=-1&s=1",
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
       }
-      ]
-    }
-  };
+    ]
 
   return data;
 }

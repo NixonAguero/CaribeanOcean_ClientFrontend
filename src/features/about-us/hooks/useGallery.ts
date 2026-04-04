@@ -1,4 +1,4 @@
-import { useState } from "react";
+/* import { useState } from "react";
 import type { Gallery } from "../types/aboutUs.types";
 
 export function useGallery ({images} : Gallery) {
@@ -8,4 +8,4 @@ export function useGallery ({images} : Gallery) {
     const thumbnails = images.filter(img => selectedImageId != img.id)
 
     return {mainImage, thumbnails, setSelectedImageId}
-}
+} */

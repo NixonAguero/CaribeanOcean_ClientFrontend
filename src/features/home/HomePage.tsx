@@ -9,7 +9,7 @@ export const HomePage = () => {
     <main>
       <Hero />
       <AboutUs />
-      <Gallery gallery = {data.gallery} />
+      <Gallery />
       <Facilities />
       <Locations />
     </main>
