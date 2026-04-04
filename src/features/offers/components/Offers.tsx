@@ -2,6 +2,7 @@ import { useOffers } from "../hooks/useOffers";
 import styles from "../styles/Offers.module.css";
 import OfferCarrusel from "./OfferCarrusel";
 
+
 export default function Offers() {
 
   const {data, loading} = useOffers();
@@ -15,5 +16,7 @@ export default function Offers() {
       <h2 className={`text-h2 ${styles.title}`}>Special Offers</h2>
       <OfferCarrusel offers={data || []} />
     </div>
+    
   );
+
 };

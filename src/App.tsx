@@ -8,6 +8,7 @@ import { RoomsPage } from './features/rooms/components/RoomsPage';
 
 export default function App() {
   return (
+    
     <BrowserRouter>
       <Layout>  
         <Routes>
@@ -20,5 +21,6 @@ export default function App() {
         </Routes>
       </Layout>  
     </BrowserRouter>
+   
   );
 }
