@@ -69,6 +69,11 @@
   }
 }
 
+.logo-img {
+  width: 80px;
+  height: auto;
+}
+
 /* --- Nota importante --- */
 /* Para que margin-top: auto funcione, asegúrate que tu contenedor principal tenga:
    display: flex; flex-direction: column; min-height: 100vh; */
