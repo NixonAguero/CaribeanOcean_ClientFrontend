@@ -4,8 +4,8 @@ export function useAutoAdvance(callback: () => void, interval: number, active: b
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const start = useCallback(() => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
     if (!active) return;
+    if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(callback, interval);
   }, [callback, interval, active]);
 

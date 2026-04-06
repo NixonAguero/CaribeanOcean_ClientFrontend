@@ -1,13 +1,34 @@
-import styles from "./Facilities.module.css";
+import { useFacilities } from "../hooks/useFacilities";
+import FacilitiesList from "./FacilitiesList";
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import styles from '../styles/Facilities.module.css'
 
-interface Props {
-  data?: any;
-}
+export default function Facilities() {
+  const { data, loading, loadMore, reset, multiplier } = useFacilities();
 
-export const Facilities = ({ data }: Props) => {
+  if (loading) return <p>Cargando</p>
+
+  const hasMore = data?.facilities && data.facilities.length >= 3 * multiplier;
+
   return (
-    <div className={styles.container}>
-      <h2>Facilities</h2>
-    </div>
-  );
-};
+    <section className="sections">
+      <h1 className="title">{data?.title}</h1>
+      <div className="decorative-line"></div>
+      <p className="description">{data?.description}</p>
+      <div>
+        <FacilitiesList facilities={data?.facilities} />
+      </div>
+      
+      {hasMore ? (
+        <button className={`${styles.showButton} description`} onClick={loadMore}>
+          Show more <MdKeyboardArrowDown />
+        </button>
+      ) : (
+        <button className={`${styles.showButton} description`} onClick={reset}>
+          Show less <MdKeyboardArrowUp />
+        </button>
+      )}
+
+    </section>
+  )
+}

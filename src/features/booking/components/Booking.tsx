@@ -6,6 +6,8 @@ import { BookingSuccess } from "./BookingSuccess";
 import { useBookingSearch } from "../hooks/useBookingSearch";
 import { useCheckout } from "../hooks/useCheckout";
 import { BookingSearchResults } from "./BookingSearchResults";
+import { Spinner } from "../../../shared/components/Spinner/Spinner";
+
 export const Booking = () => {
   const search = useBookingSearch();
   const checkout = useCheckout();
@@ -40,15 +42,23 @@ export const Booking = () => {
   }
   // --- 3. RENDER DE BUSCADOR Y RESULTADOS (Paso 1 y 2) ---
   return (
+     
     <div className={styles.pageContainer}>
-      <BookingSearchForm
+      
+        <BookingSearchForm
         filters={search.state.filter}
         updateFilter={search.actions.updateFilter}
         onSearch={search.actions.handleSearch}
         hasSearched={search.state.hasSearched}
         error={search.state.error}
+        isLoading={search.state.isLoading}
       />
-      {search.state.hasSearched && !search.state.error && (
+      {/* Si ESTÁ cargando, mostramos Spinner */}
+      {search.state.isLoading && (
+         <Spinner message="Searching for the perfect room..." />
+      )}
+
+      {search.state.hasSearched && !search.state.error && !search.state.isLoading && (
         <BookingSearchResults
           hasSearched={search.state.hasSearched}
           isRecommendation={search.state.isRecommendation}

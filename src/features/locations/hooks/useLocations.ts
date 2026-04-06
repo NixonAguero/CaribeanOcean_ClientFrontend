@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { getLocations } from "../services/locations.service";
+import { getLocation } from "../services/locations.service";
+import type { Location } from "../types/location.types";
 
 export function useLocations() {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<Location>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getLocations().then((res) => {
+    getLocation()
+    .then((res) => {
       setData(res);
       setLoading(false);
     });

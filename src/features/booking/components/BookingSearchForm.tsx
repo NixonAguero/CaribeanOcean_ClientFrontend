@@ -2,11 +2,13 @@
 import styles from './Booking.module.css'
 import type { BookingSearchFromProps } from '../types/booking.types';
 
+
+
 export const BookingSearchForm = ({
   filters, updateFilter,
-  onSearch, hasSearched, error
+  onSearch, hasSearched, error, isLoading
 }: BookingSearchFromProps) => {
-return (
+  return (
     <section className={styles.searchHero}>
       <form className={styles.card} onSubmit={onSearch}>
         <h2 className={styles.title}>Reservation</h2>
@@ -40,8 +42,8 @@ return (
             <option value="villa">Beachfront Villa</option>
           </select>
         </div>
-        <button type="submit" className={styles.reserveButton}>
-          {hasSearched ? "Search Again" : "Search Availability"}
+        <button type="submit" disabled={isLoading} className={styles.reserveButton}>
+          {isLoading ? "Searching..." : (hasSearched ? "Search Again" : "Search Availability")}
         </button>
       </form>
     </section>
