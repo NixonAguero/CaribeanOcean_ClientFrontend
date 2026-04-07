@@ -4,6 +4,8 @@
   margin: 0 auto;
   width: min(100%, 1200px);
   overflow-x: clip;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 .title {

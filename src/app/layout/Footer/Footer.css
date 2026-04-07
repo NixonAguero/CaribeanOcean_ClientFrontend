@@ -4,7 +4,7 @@
   color: white;
   padding: 20px 40px;
   text-align: left;
-  z-index: 1000;
+  z-index: 9999;
 
   /* Nuevo: siempre al final de la página */
   margin-top: auto;

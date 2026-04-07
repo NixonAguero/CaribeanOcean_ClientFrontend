@@ -5,7 +5,7 @@ import logo from "../../../assets/footer/Logo.png";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="footer">
+    <footer className="footer" id="footer">
       <div className="footer-container">
         {/* Logo + nombre */}
         <div className="footer-section logo-section">

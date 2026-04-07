@@ -1,7 +1,7 @@
 .container {
   text-align: center;
   padding: 40px 20px;
-  margin-bottom: 600px; /* espacio extra para que el footer no quede pegado */
+  margin-top: 5rem;
 }
 
 .track {
@@ -18,12 +18,12 @@
   background: white;
   border-radius: 12px;
   padding: 16px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
 .active {
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .card img {
@@ -69,20 +69,20 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  
+
   width: 50px;
   height: 50px;
-  
+
   background: white;
   border-radius: 50%;
   border: none;
-  
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
   cursor: pointer;
   font-size: 22px;
   font-weight: bold;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -100,7 +100,8 @@
 .leftArrow {
   position: absolute;
   margin-top: 200px;
-  left: 10px; /* más lejos a la izquierda */
+  left: 10px;
+  /* más lejos a la izquierda */
   top: 50%;
   transform: translateY(-50%);
 }
@@ -108,7 +109,8 @@
 .rightArrow {
   position: absolute;
   margin-top: 200px;
-  right: 10px; /* más lejos a la derecha */
+  right: 10px;
+  /* más lejos a la derecha */
   top: 50%;
   transform: translateY(-50%);
 }
@@ -145,14 +147,14 @@
   display: none;
 }
 
-.title{
-    text-align: center;
+.title {
+  text-align: center;
 }
 
 @media (max-width: 768px) {
 
   .container {
-    margin-bottom: 200px;
+    margin-bottom: 60px;
   }
 
   .card {
@@ -191,7 +193,8 @@
   }
 
   .carousel {
-    overflow: visible; /* 👈 importante */
+    overflow: visible;
+    /* 👈 importante */
   }
 
   .track {
@@ -208,7 +211,8 @@
 
   /* 👇 card más pequeña para dejar espacio a flechas */
   .card {
-    width: 220px;   /* 👈 clave */
+    width: 220px;
+    /* 👈 clave */
     margin-top: 40px;
     padding: 12px;
   }
@@ -255,7 +259,7 @@
 @media (min-width: 1200px) {
 
   .container {
-    margin-bottom: 300px;
+    margin-bottom: 80px;
   }
 
   .card {
@@ -284,7 +288,7 @@
 @media (min-width: 760px) and (max-width: 1199px) {
 
   .container {
-    margin-bottom: 250px;
+    margin-bottom: 80px;
   }
 
   .card {
@@ -318,7 +322,7 @@
 @media (min-width: 1200px) and (max-width: 1366px) {
 
   .container {
-    margin-bottom: 180px;
+    margin-bottom: 60px;
     padding: 30px 20px;
   }
 
@@ -327,7 +331,8 @@
   }
 
   .card {
-    width: 300px; /* 👈 más compacto que desktop grande */
+    width: 300px;
+    /* 👈 más compacto que desktop grande */
     margin-top: 60px;
   }
 
