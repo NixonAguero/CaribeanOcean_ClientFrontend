@@ -1,6 +1,6 @@
 import {Footer} from "./Footer/Footer";
 import MainNavBar from "./Navbar/MainNavBar";
-import PromModal from "./Promotions/PubModal";
+import PromModal from "./Ads/PubModal";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
