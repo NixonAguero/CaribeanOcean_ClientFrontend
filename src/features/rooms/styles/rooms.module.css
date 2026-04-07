@@ -1,7 +1,7 @@
 .container {
   text-align: center;
   padding: 40px 20px;
-  margin-bottom: 600px; /* espacio extra para que el footer no quede pegado */
+  margin-top: 5rem;
 }
 
 .track {
