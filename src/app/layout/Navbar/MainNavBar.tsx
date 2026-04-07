@@ -4,10 +4,22 @@ import { Link } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 
 export default function Navbar() {
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
+  
+  const routes = [
+    { name: "Home", path: "/" },
+    { name: "About Us", path: "/about" },
+    { name: "Booking", path: "/booking" },
+    { name: "Offers", path: "/offers" },
+    { name: "Rooms", path: "/rooms" },
+  ];
+
+  const linkClasses = ({ isActive }: { isActive: boolean }) =>
+  isActive ? "nav-link active" : "nav-link";
 
   return (
     <nav className="navbar">
