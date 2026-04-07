@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import "./MainNavBar.css"
 export default function Navbar() {
   
-
   const routes = [
     { name: "Home", path: "/" },
     { name: "About Us", path: "/about" },
