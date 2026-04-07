@@ -9,6 +9,16 @@ body {
   background-color: var(--color-sand-white);
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 1;
+}
+
 .sections {
   background-color: transparent; 
   width: 100%;

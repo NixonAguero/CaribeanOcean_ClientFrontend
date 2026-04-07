@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/rooms.module.css";
+import { Badge } from "./Badge";
 
 interface Props {
   room: any;
@@ -36,7 +37,7 @@ export default function RoomCard({ room, isActive }: Props) {
 
       <div className={styles.features}>
         {room.features?.map((f: string, i: number) => (
-          <span key={i}>{f}</span>
+          <Badge key={i} text={f} />
         ))}
       </div>
     </div>

@@ -7,11 +7,11 @@ import Locations from "../locations/components/Locations";
 export const HomePage = () => {
   return (
     <main>
-      <Hero />
-      <AboutUs />
-      <Gallery />
-      <Facilities />
-      <Locations />
+      <div id="home"> <Hero /> </div>
+      <div id="about"> <AboutUs /> </div>
+      <div id="gallery"> <Gallery /> </div>
+      <div id="facilities"> <Facilities /> </div>
+      <div id="location"> <Locations /> </div>
     </main>
   );
 };

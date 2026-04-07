@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
+import logo from "../../../assets/footer/Logo.png";
 
 export const Footer: React.FC = () => {
   return (
@@ -8,7 +9,7 @@ export const Footer: React.FC = () => {
       <div className="footer-container">
         {/* Logo + nombre */}
         <div className="footer-section logo-section">
-          <div className="logo-box"></div>
+          <img src={logo} alt="Hotel Ocean Caribbean" className="logo-img" />
           <p>Hotel Ocean Caribbean</p>
         </div>
 
@@ -19,10 +20,9 @@ export const Footer: React.FC = () => {
             <li><Link to="/offers">Offers</Link></li>
             <li><Link to="/rooms">Rooms</Link></li>
             <li><Link to="/booking">Online Reservation</Link></li>
-            <li><Link to="/facilities">Facilities</Link></li>
-            <li><Link to="/location">How to get there</Link></li>
-            <li><Link to="/about">About Us</Link></li>
-            <li><Link to="/contact">Contact Us</Link></li>
+            <li><Link to="/#facilities">Facilities</Link></li>
+            <li><Link to="/#location">How to get there</Link></li>
+            <li><Link to="/#about">About Us</Link></li>
           </ul>
         </div>
 

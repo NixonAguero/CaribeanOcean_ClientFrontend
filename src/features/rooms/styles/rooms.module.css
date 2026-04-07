@@ -1,6 +1,6 @@
 .container {
   text-align: center;
-  padding: 40px;
+  padding: 40px 20px;
   margin-bottom: 600px; /* espacio extra para que el footer no quede pegado */
 }
 
@@ -13,11 +13,13 @@
 /* CARD */
 .card {
   width: 300px;
+  max-width: 90vw;
   margin-top: 100px;
   background: white;
   border-radius: 12px;
   padding: 16px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
 }
 
 .active {
@@ -64,14 +66,37 @@
 
 /* BOTONES */
 .arrow {
-  font-size: 40px;
-  background: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  
+  width: 50px;
+  height: 50px;
+  
+  background: white;
+  border-radius: 50%;
   border: none;
+  
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  
   cursor: pointer;
-  transition: transform 0.2s ease;
+  font-size: 22px;
+  font-weight: bold;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.2s ease;
 }
 
-/* Alejamos los botones */
+.arrow:hover {
+  transform: translateY(-50%) scale(1.1);
+  background: black;
+  color: white;
+}
+
+/* Botones para mover el carrusel */
 .leftArrow {
   position: absolute;
   margin-top: 200px;
@@ -92,28 +117,27 @@
 .item {
   transition: all 0.5s ease;
   opacity: 0;
-  transform: scale(0.7) translateZ(-50px);
-  position: absolute; /* Importante para superponer */
+  position: absolute;
   left: 50%;
   top: 0;
-  transform-origin: center center;
+  transform: translateX(-50%) scale(0.7);
 }
 
 .center {
   opacity: 1;
-  transform: scale(1.1) translateZ(0) translateX(-40%);
+  transform: translateX(-50%) scale(1);
   z-index: 3;
 }
 
 .left {
   opacity: 0.6;
-  transform: scale(0.9) translateZ(-40px) translateX(-180%);
+  transform: translateX(-160%) scale(0.9);
   z-index: 2;
 }
 
 .right {
   opacity: 0.6;
-  transform: scale(0.9) translateZ(-40px) translateX(80%);
+  transform: translateX(60%) scale(0.9);
   z-index: 2;
 }
 
@@ -122,5 +146,242 @@
 }
 
 .title{
-    margin-top: 20px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+
+  .container {
+    margin-bottom: 200px;
+  }
+
+  .card {
+    width: 240px;
+    margin-top: 60px;
+  }
+
+  .card img {
+    height: 160px;
+    object-fit: cover;
+  }
+
+  .item.center {
+    transform: translateX(-50%) scale(1);
+  }
+
+  .item.left {
+    transform: translateX(-150%) scale(0.8);
+  }
+
+  .item.right {
+    transform: translateX(50%) scale(0.8);
+  }
+
+  .features span {
+    font-size: 11px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .container {
+    padding: 20px 10px;
+    margin-bottom: 40px;
+  }
+
+  .carousel {
+    overflow: visible; /* 👈 importante */
+  }
+
+  .track {
+    min-height: 320px;
+  }
+
+  /* 🔥 mantenemos el carrusel (NO reset total) */
+  .item {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%) scale(0.7);
+  }
+
+  /* 👇 card más pequeña para dejar espacio a flechas */
+  .card {
+    width: 220px;   /* 👈 clave */
+    margin-top: 40px;
+    padding: 12px;
+  }
+
+  .card img {
+    height: 140px;
+    object-fit: cover;
+  }
+
+  .card h3 {
+    font-size: 16px;
+  }
+
+  .card p {
+    font-size: 14px;
+  }
+
+  .button {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  /* 👇 ajustamos posiciones del carrusel */
+  .center {
+    transform: translateX(-50%) scale(0.95);
+  }
+
+  .left {
+    transform: translateX(-130%) scale(0.75);
+  }
+
+  .right {
+    transform: translateX(30%) scale(0.75);
+  }
+
+  /* badges más pequeños */
+  .badge {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+
+}
+
+@media (min-width: 1200px) {
+
+  .container {
+    margin-bottom: 300px;
+  }
+
+  .card {
+    width: 360px;
+  }
+
+  .card img {
+    height: 220px;
+    object-fit: cover;
+  }
+
+  .item.center {
+    transform: translateX(-50%) scale(1.05);
+  }
+
+  .item.left {
+    transform: translateX(-200%) scale(0.9);
+  }
+
+  .item.right {
+    transform: translateX(90%) scale(0.9);
+  }
+
+}
+
+@media (min-width: 760px) and (max-width: 1199px) {
+
+  .container {
+    margin-bottom: 250px;
+  }
+
+  .card {
+    width: 280px;
+    margin-top: 80px;
+  }
+
+  .card img {
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .item.center {
+    transform: translateX(-50%) scale(1);
+  }
+
+  .item.left {
+    transform: translateX(-170%) scale(0.85);
+  }
+
+  .item.right {
+    transform: translateX(70%) scale(0.85);
+  }
+
+  .track {
+    min-height: 420px;
+  }
+
+}
+
+@media (min-width: 1200px) and (max-width: 1366px) {
+
+  .container {
+    margin-bottom: 180px;
+    padding: 30px 20px;
+  }
+
+  .track {
+    min-height: 380px;
+  }
+
+  .card {
+    width: 300px; /* 👈 más compacto que desktop grande */
+    margin-top: 60px;
+  }
+
+  .card img {
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .item.center {
+    transform: translateX(-50%) scale(1);
+  }
+
+  .item.left {
+    transform: translateX(-150%) scale(0.85);
+  }
+
+  .item.right {
+    transform: translateX(50%) scale(0.85);
+  }
+
+}
+
+.features .ocean {
+  background: #4da6ff;
+}
+
+.features .wifi {
+  background: #28a745;
+}
+
+.features .bed {
+  background: #6f42c1;
+}
+
+.features .pool {
+  background: #0056b3;
+}
+
+.features .balcony {
+  background: #fd7e14;
+}
+
+.features .beds {
+  background: #6c757d;
+}
+
+.default {
+  background: #999;
+}
+
+.badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: white;
 }

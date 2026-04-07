@@ -5,12 +5,16 @@ import { Booking } from './features/booking/components/Booking';
 import AboutUs from './features/about-us/components/AboutUs';
 import Offers from './features/offers/components/Offers';
 import { RoomsPage } from './features/rooms/components/RoomsPage';
+import { ScrollToHash } from './shared/components/ScrollToHash';
 
 export default function App() {
   return (
     
     <BrowserRouter>
-      <Layout>  
+      <ScrollToHash />
+
+      <Layout>     
+
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutUs />} />
@@ -19,7 +23,7 @@ export default function App() {
           <Route path="/rooms" element={<RoomsPage />} />
           <Route path="*" element={<div>Página no encontrada</div>} />
         </Routes>
-      </Layout>  
+      </Layout>
     </BrowserRouter>
    
   );
