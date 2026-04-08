@@ -33,7 +33,7 @@ export default function Navbar() {
         {/* Links Desktop */}
         <div className="navbar-links">
           <Link to="/" className="nav-link">Home</Link>
-          <Link to="/offers" className="nav-link">Offers</Link>
+          <Link to="/offers" className="nav-link nav-link-highlight">Offers</Link>
           <Link to="/rooms" className="nav-link">Rooms</Link>
           <Link to="/booking" className="nav-link">Booking</Link>
           <Link to="/#facilities" className="nav-link">Facilities</Link>
@@ -45,7 +45,7 @@ export default function Navbar() {
         {/* Links Mobile Menu */}
         <div className={`mobile-menu ${isMenuOpen ? "open" : ""}`}>
           <Link to="/" className="nav-link" onClick={closeMenu}>Home</Link>
-          <Link to="/offers" className="nav-link" onClick={closeMenu}>Offers</Link>
+          <Link to="/offers" className="nav-link nav-link-highlight" onClick={closeMenu}>Offers</Link>
           <Link to="/rooms" className="nav-link" onClick={closeMenu}>Rooms</Link>
           <Link to="/booking" className="nav-link" onClick={closeMenu}>Booking</Link>
           <Link to="/#facilities" className="nav-link" onClick={closeMenu}>Facilities</Link>
