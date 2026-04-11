@@ -1,24 +1,43 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
-import logo from "../../../assets/footer/Logo.png";
+import logo from "../../../assets/footer/logo.png";
+import { FiPhone, FiMail, FiMapPin } from "react-icons/fi";
+import { FaWhatsapp, FaFacebookF, FaInstagram, FaTripadvisor } from "react-icons/fa";
 
 export const Footer: React.FC = () => {
   return (
     <footer className="footer" id="footer">
+
+      {/* Decorative top border */}
+      <div className="footer-accent" />
+
       <div className="footer-container">
-        {/* Logo + nombre */}
-        <div className="footer-section logo-section">
-          <img src={logo} alt="Hotel Ocean Caribbean" className="logo-img" />
-          <p>Hotel Ocean Caribbean</p>
+
+        {/* Column 1: Logo + Brand */}
+        <div className="footer-section footer-brand">
+          <img src={logo} alt="Caribbean Ocean Resort & Spa logo" className="footer-logo-img" />
+          <div className="footer-brand-text">
+            <span className="footer-brand-name">Caribbean Ocean</span>
+            <span className="footer-brand-tagline">Resort & Spa</span>
+          </div>
+          <p className="footer-brand-desc">
+            Where the jungle meets the sea. Discover paradise on the shores of
+            Puerto Viejo de Talamanca, Costa Rica.
+          </p>
+          <div className="footer-social">
+            <a href="#" aria-label="Facebook" className="footer-social-icon"><FaFacebookF /></a>
+            <a href="#" aria-label="Instagram" className="footer-social-icon"><FaInstagram /></a>
+            <a href="#" aria-label="TripAdvisor" className="footer-social-icon"><FaTripadvisor /></a>
+          </div>
         </div>
 
-        {/* Menú */}
+        {/* Column 2: Quick Links */}
         <div className="footer-section">
-          <h3>Menu</h3>
-          <ul>
+          <h3 className="footer-heading">Explore</h3>
+          <ul className="footer-links">
             <li><Link to="/offers">Offers</Link></li>
-            <li><Link to="/rooms">Rooms</Link></li>
+            <li><Link to="/rooms">Rooms & Rates</Link></li>
             <li><Link to="/booking">Online Reservation</Link></li>
             <li><Link to="/#facilities">Facilities</Link></li>
             <li><Link to="/#location">How to get there</Link></li>
@@ -26,25 +45,51 @@ export const Footer: React.FC = () => {
           </ul>
         </div>
 
-        {/* Location */}
+        {/* Column 3: Location */}
         <div className="footer-section">
-          <h3>Location</h3>
-          <p>
-            The hotel is located fifty yards from Playa Carmen in the middle
-            of the natural beauty and excitement of Santa Teresa, Cóbano,
-            Puntarenas.
-          </p>
+          <h3 className="footer-heading">Location</h3>
+          <div className="footer-location">
+            <FiMapPin className="footer-icon" />
+            <p>
+              The hotel is located fifty yards from Playa Cocles in the middle
+              of the natural beauty of Puerto Viejo de Talamanca, Limón, Costa Rica.
+            </p>
+          </div>
         </div>
 
-        {/* Contact */}
+        {/* Column 4: Contact */}
         <div className="footer-section">
-          <h3>Contact Us</h3>
-          <p>+1 (305) 853 8700</p>
-          <p>+506 2640 0404</p>
-          <p>+506 8550 0444</p>
-          <p>reservations@hotelanteresa.com</p>
+          <h3 className="footer-heading">Contact Us</h3>
+          <ul className="footer-contact">
+            <li>
+              <FiPhone className="footer-icon" />
+              <span>+1 (305) 853 8700</span>
+            </li>
+            <li>
+              <FiPhone className="footer-icon" />
+              <span>+506 2640 0404</span>
+            </li>
+            <li>
+              <FaWhatsapp className="footer-icon" />
+              <span>+506 8550 0444</span>
+            </li>
+            <li>
+              <FiMail className="footer-icon" />
+              <a href="mailto:reservations@hotelcaribbean.com">
+                reservations@hotelcaribbean.com
+              </a>
+            </li>
+          </ul>
         </div>
+
       </div>
+
+      {/* Bottom bar */}
+      <div className="footer-bottom">
+        <p>&copy; {new Date().getFullYear()} Caribbean Ocean Resort & Spa. All rights reserved.</p>
+        <a href="#" className="footer-privacy">Privacy Policy</a>
+      </div>
+
     </footer>
   );
 };
