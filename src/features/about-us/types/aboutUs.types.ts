@@ -1,4 +1,5 @@
 export interface AboutUs {
-  id: string;
+  title: string;
+  subtitle: string;
   description: string;
 }

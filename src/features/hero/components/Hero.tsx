@@ -17,8 +17,8 @@ export default function Hero() {
   
   return (
     <section className={styles.hero} id="hero">
-      <HeroCarrusel images={hero.images} currentSlide={currentSlide} title={hero.title}/>
-      <HeroContent title={hero.title} description={hero.description}/>
+      <HeroCarrusel images={hero.images} currentSlide={currentSlide}/>
+      <HeroContent title={hero.title} subtitle={hero.subtitle} description={hero.description}/>
       <HeroArrow onNext={nextSlide} onPrev={prevSlide}/>
       <HeroDots currentSlide={currentSlide} onSelect={goToSlide} totalSlides={totalSlides}/>
     </section>

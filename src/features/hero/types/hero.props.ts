@@ -3,11 +3,11 @@ import type { HeroImage } from "./hero.types";
 export interface HeroCarruselProps {
     images: HeroImage[];
     currentSlide: number;
-    title: string;
 }
 
 export interface HeroContentProps {
     title: string;
+    subtitle : string;
     description: string;
 }
 

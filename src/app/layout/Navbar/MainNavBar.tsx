@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./MainNavBar.css";
 import { Link } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
+import logo from "../../../assets/logo/logo.png";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,6 +24,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link to="/" className="navbar-logo" onClick={closeMenu}>
           <span className="navbar-logo-icon">✦</span>
+          <img src={logo} alt="Caribbean Ocean Resort & Spa logo" className="logo" />
           <div className="navbar-logo-text">
             <span className="navbar-logo-main">Caribbean Ocean</span>
             <span className="navbar-logo-sub">Resort & Spa</span>

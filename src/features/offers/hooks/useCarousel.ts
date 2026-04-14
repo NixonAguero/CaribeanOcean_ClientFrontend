@@ -15,5 +15,6 @@ export function useCarousel({offers} : OfferCarruselProps) {
     next,
     prev,
     visibleItems,
+    itemsToShow,
   };
 }

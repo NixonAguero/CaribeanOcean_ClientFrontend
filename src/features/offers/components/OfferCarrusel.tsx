@@ -3,10 +3,12 @@ import styles from "../styles/Offers.module.css";
 import OfferCard from "./OfferCard";
 import { useCarousel } from "../hooks/useCarousel";
 
-export default function OfferCarrusel({offers} : OfferCarruselProps){
+export default function OfferCarrusel({ offers }: OfferCarruselProps) {
 
-    if(offers.length == 0) return null;
-    const { visibleItems, next, prev } = useCarousel({ offers });
+    if (offers.length == 0) return null;
+    const { currentIndex, next, prev, itemsToShow } = useCarousel({ offers });
+
+    const slidePercent = (currentIndex / offers.length) * 100;
 
     return (
         <div className={styles.carouselWrapper}>
@@ -14,19 +16,29 @@ export default function OfferCarrusel({offers} : OfferCarruselProps){
                 &#10094;
             </button>
 
-            <div className={styles.grid}>
-                {visibleItems && visibleItems.length > 0 ? (
-                    visibleItems.map((offer) => (
-                        <OfferCard key={offer.id} offer={offer} />
-                    ))
-                ) : (
-                    <p>There are no current offers.</p>
-                )}
+            <div className={styles.trackViewport}>
+                <div
+                    className={styles.track}
+                    style={{
+                        width: `${(offers.length / itemsToShow) * 100}%`,
+                        transform: `translateX(-${slidePercent}%)`,
+                    }}
+                >
+                    {offers.map((offer, index) => (
+                        <div
+                            key={index}
+                            className={styles.trackItem}
+                            style={{ width: `${100 / offers.length}%` }}
+                        >
+                            <OfferCard offer={offer} />
+                        </div>
+                    ))}
+                </div>
             </div>
 
             <button className={styles.arrow} onClick={next} aria-label="Next offers">
                 &#10095;
             </button>
-      </div>
+        </div>
     );
 }

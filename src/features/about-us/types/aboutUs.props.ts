@@ -1,3 +1,5 @@
 export interface AboutUsProps{
-  description: string
+  title: string;
+  subtitle: string;
+  description: string;
 }
