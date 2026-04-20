@@ -3,6 +3,5 @@ import type { AboutUs } from "../types/aboutUs.types";
 
 export async function getAboutUs(): Promise<AboutUs> {
   const aboutUs = await apiClient.get<AboutUs>("/AboutUs");
-  console.log(aboutUs)
   return aboutUs.data;
 }
