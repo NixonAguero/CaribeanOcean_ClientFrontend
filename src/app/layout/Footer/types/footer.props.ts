@@ -1,13 +1,17 @@
-import type { FooterBrand, HotelEmail, HotelLocation, HotelNumber, HotelSocialMedia } from "./footer.types";
+import type { FooterBrand, HotelContact, HotelLocation} from "./footer.types";
 
 export interface FooterBrandProps{
     footerBrand : FooterBrand;
-    socialMedia: HotelSocialMedia[];
+    socialMedia: HotelContact[];
 }
 
 export interface FooterContactProps{
-    phoneNumbers : HotelNumber[];
-    emails : HotelEmail[];
+    phoneNumbers : HotelContact[];
+    emails : HotelContact[];
+}
+
+export interface FooterSocialIconsProps{
+    socialMedia: HotelContact[];
 }
 
 export interface FooterLocationProps{

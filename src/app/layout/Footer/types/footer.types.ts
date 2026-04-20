@@ -4,19 +4,9 @@ export interface FooterBrand {
     description: string;
 }
 
-export interface HotelNumber {
-    typeContact: string;
-    prefix: string;
-    phoneNumber: string;
-}
-
-export interface HotelEmail {
-    email: string;
-}
-
-export interface HotelSocialMedia {
-    socialMedia: string;
-    link: string;
+export interface HotelContact{
+    type: string;
+    contact: string;
 }
 
 export interface HotelLocation {
@@ -25,8 +15,6 @@ export interface HotelLocation {
 }
 
 export interface HotelContactInfo {
-    phoneNumbers: HotelNumber[];
-    emails: HotelEmail[];
-    socialMedia: HotelSocialMedia[];
+    contacts: HotelContact[];
     location: HotelLocation;
 }

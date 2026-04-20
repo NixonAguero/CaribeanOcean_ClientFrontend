@@ -1,19 +1,19 @@
 import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
-import type { HotelSocialMedia } from "../types/footer.types";
+import type { FooterSocialIconsProps } from "../types/footer.props";
 
-export default function FooterSocialIcons({ socialMedia }: { socialMedia: HotelSocialMedia[] }) {
+export default function FooterSocialIcons({ socialMedia }: FooterSocialIconsProps) {
   return (
     <div className="footer-social">
       {socialMedia.map((media) => (
         <a 
-          href={media.link} 
-          aria-label={media.socialMedia} 
+          href={media.contact} 
+          aria-label={media.type} 
           className="footer-social-icon"
           target="_blank"
         >
-          {media.socialMedia === "facebook" && <FaFacebookF />}
-          {media.socialMedia === "instagram" && <FaInstagram />}
-          {media.socialMedia === "tiktok" && <FaTiktok />}
+          {media.type === "facebook" && <FaFacebookF />}
+          {media.type === "instagram" && <FaInstagram />}
+          {media.type === "tiktok" && <FaTiktok />}
         </a>
       ))}
     </div>

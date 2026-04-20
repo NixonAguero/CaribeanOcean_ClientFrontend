@@ -16,5 +16,10 @@ export function useFooter() {
 
     const isLoading = !footerBrand || !hotelContactInfo;
 
-    return { footerBrand, hotelContactInfo, error, isLoading };
+    const socialMedia = hotelContactInfo?.contacts.filter(contact => contact.type == 'facebook' || contact.type == 'instagram' || contact.type == 'tiktok');
+    const emails = hotelContactInfo?.contacts.filter(contact => contact.type == 'email');
+    const phoneNumbers = hotelContactInfo?.contacts.filter(contact => contact.type == 'calls' || contact.type == 'whatsapp');
+    const location = hotelContactInfo?.location
+
+    return { footerBrand, socialMedia, emails, phoneNumbers, location, error, isLoading };
 }

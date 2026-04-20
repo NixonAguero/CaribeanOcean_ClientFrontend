@@ -1,26 +1,18 @@
 //import apiClient from "../../../shared/services/apiClient";
-import type { FooterBrand, HotelContactInfo, HotelEmail, HotelLocation, HotelNumber, HotelSocialMedia } from "../types/footer.types";
-
+import type { FooterBrand, HotelContact, HotelLocation, HotelContactInfo} from "../types/footer.types";
 
 export async function getHotelContact(): Promise<HotelContactInfo>{
 
     //const aboutUs = await apiClient.get("/about-us");
 
-    const hotelEmails: HotelEmail[] = [
-        { email: "reservations@hotelcaribbean.com" },
-        { email: "contact@hotelcaribbean.com" }
-    ];
-
-    const phoneNumbers: HotelNumber[] = [
-        { typeContact: "calls", prefix: "+1 (305)", phoneNumber: "853 8700" },
-        { typeContact: "calls", prefix: "+506", phoneNumber: "2640 0404" },
-        { typeContact: "whatsapp", prefix: "+506", phoneNumber: "8550 0444" }
-    ]
-
-    const hotelSocialMedia: HotelSocialMedia[] = [
-        { socialMedia: "facebook", link: "https://www.facebook.com/caribbeanoceantours" },
-        { socialMedia: "instagram", link: "https://www.instagram.com/caribbean_ocean_tours/" },
-        { socialMedia: "tiktok", link: "https://www.tiktok.com/@whattodoincuracao" }
+    const hotelContact : HotelContact[] = [
+        {type : "email", contact: "info@caribbean.cr"},
+        {type : "email", contact: "reservas@caribbean.cr"},
+        {type : "whatsapp", contact: "+506 8888-0001"},
+        {type : "calls", contact: "+506 2222-1010"},
+        {type : "facebook", contact: "https://www.facebook.com/caribbeanoceantours"},
+        {type : "instagram", contact: "https://www.instagram.com/caribbean_ocean_tours/"},
+        {type : "tiktok", contact: "https://www.tiktok.com/@whattodoincuracao"}
     ]
 
     const hotelLocation: HotelLocation = { 
@@ -29,17 +21,14 @@ export async function getHotelContact(): Promise<HotelContactInfo>{
     }
 
     const hotelContactInfo : HotelContactInfo = {
-        emails : hotelEmails,
-        location : hotelLocation,
-        phoneNumbers : phoneNumbers,
-        socialMedia : hotelSocialMedia
+        contacts : hotelContact,
+        location : hotelLocation
     }
 
     return hotelContactInfo;
 }
 
 export async function getFooterBrand(): Promise<FooterBrand> {
-    //const aboutUs = await apiClient.get("/about-us");
 
     const data: FooterBrand = {
         title: "Caribbean Ocean",

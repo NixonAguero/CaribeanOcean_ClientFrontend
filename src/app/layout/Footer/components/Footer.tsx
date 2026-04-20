@@ -8,9 +8,9 @@ import { useFooter } from "../hooks/useFooter";
 
 export default function Footer() {
   
-  const {footerBrand, hotelContactInfo, error, isLoading} = useFooter();
+  const {footerBrand, socialMedia, emails, phoneNumbers, location, error, isLoading} = useFooter();
   if (error) return <div className="error">Something went wrong. Please try again.</div>;
-  if (isLoading || !footerBrand || !hotelContactInfo) return null;
+  if (isLoading || !footerBrand || !socialMedia || !emails || !phoneNumbers || !location) return null;
 
   return (
     <footer className="footer" id="footer">
@@ -18,10 +18,10 @@ export default function Footer() {
       <div className="footer-accent" />
 
       <div className="footer-container">
-        <FooterBrand footerBrand={footerBrand} socialMedia={hotelContactInfo.socialMedia}/>
+        <FooterBrand footerBrand={footerBrand} socialMedia={socialMedia}/>
         <FooterLinks />
-        <FooterLocation location={hotelContactInfo.location}/>
-        <FooterContact emails={hotelContactInfo.emails} phoneNumbers={hotelContactInfo.phoneNumbers} />
+        <FooterLocation location={location}/>
+        <FooterContact emails={emails} phoneNumbers={phoneNumbers} />
       </div>
 
       <FooterBottom />
