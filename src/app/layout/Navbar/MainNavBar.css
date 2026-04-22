@@ -51,6 +51,7 @@
   display: flex;
   align-items: center;
   padding: 0 28px;
+  gap: 16px;
 }
 
 /* ─── Logo ───────────────────────────────────────────── */
@@ -102,13 +103,10 @@
 
 /* ─── Links container ────────────────────────────────── */
 .navbar-links {
-  position: absolute;
-  left: 60%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   gap: 6px;
+  margin: 0 auto; 
 }
 
 /* ─── Base nav link ──────────────────────────────────── */
