@@ -1,16 +1,11 @@
-import type { Gallery, GalleryImage } from "./gallery.types";
-
-export interface GalleryProps {
-  gallery: Gallery;
-}
-
+import type { GalleryImage } from "./gallery.types";
 export interface MainImageProps{
   image : GalleryImage;
 }
 
 export interface ThumbnailsProps{
   images : GalleryImage[];
-  onSelect: (id:string) => void;
+  onSelect: (id:number) => void;
 }
 
 export interface AboutUsProps{

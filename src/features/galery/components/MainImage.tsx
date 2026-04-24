@@ -6,7 +6,7 @@ export default function MainImage({image} : MainImageProps) {
     return(
         <img
             src={image.url}
-            alt={image.description}
+            alt={image.alt}
             loading='lazy'
             className={styles.galleryImage}
         />
