@@ -14,14 +14,14 @@ export default function Locations() {
   return (
     <section className="sections">
       <h1 className="title">{data?.title}</h1>
-      <span className="subtitle"><GrMapLocation /></span>
+      <span className="subtitle"><GrMapLocation /> {data?.subtitle}</span>
       <div className="decorative-line"></div>
       <p className="description">{data?.description}</p>
 
       <div className={styles.mapContainer}>
         <div className={styles.map}>
           <iframe 
-          src={data?.mapsLocation} 
+          src={data?.images[0]?.url} 
           width="100%" 
           height="100%" 
           style={{ border: 0 }} 

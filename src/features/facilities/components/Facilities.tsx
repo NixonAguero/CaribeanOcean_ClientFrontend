@@ -14,7 +14,7 @@ export default function Facilities() {
     <section className="sections">
       <h1 className="title">{data?.title}</h1>
       <div className="decorative-line"></div>
-      <p className="description">{data?.description}</p>
+      <span className="subtitle">{data?.subtitle}</span>
       <div>
         <FacilitiesList facilities={data?.facilities} />
       </div>
