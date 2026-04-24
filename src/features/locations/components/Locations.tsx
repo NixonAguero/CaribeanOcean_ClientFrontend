@@ -21,7 +21,7 @@ export default function Locations() {
       <div className={styles.mapContainer}>
         <div className={styles.map}>
           <iframe 
-          src={data?.images[0]?.url} 
+          src={data?.images[1]?.url} 
           width="100%" 
           height="100%" 
           style={{ border: 0 }} 
