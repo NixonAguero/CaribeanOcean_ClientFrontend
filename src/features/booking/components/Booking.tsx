@@ -52,6 +52,7 @@ export const Booking = () => {
         hasSearched={search.state.hasSearched}
         error={search.state.error}
         isLoading={search.state.isLoading}
+        roomTypeCatalog={search.state.roomTypeCatalog}
       />
       {/* Si ESTÁ cargando, mostramos Spinner */}
       {search.state.isLoading && (
