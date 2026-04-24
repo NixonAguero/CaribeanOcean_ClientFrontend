@@ -9,12 +9,13 @@ interface Props {
 export const Rooms = ({ data, loading }: Props) => {
   return (
     <div className={styles.container}>
-      <h2 className="title">Rooms</h2>
+      <h2 className="title">{data?.title}</h2>
+      <h3 className="subtitle">{data?.subtitle}</h3>
 
       {loading && <p>Loading rooms...</p>}
 
-      {!loading && data?.length > 0 && (
-        <RoomsCarousel rooms={data} />
+      {!loading && data?.rooms?.length > 0 && (
+        <RoomsCarousel rooms={data.rooms} />
       )}
     </div>
   );

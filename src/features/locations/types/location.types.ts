@@ -1,5 +1,10 @@
 export interface Location {
   title: string;
+  subtitle: string;
   description: string;
-  mapsLocation: string;
+  images: {    
+      id: number;
+      url: string;
+      alt: string;
+    }[];
 }

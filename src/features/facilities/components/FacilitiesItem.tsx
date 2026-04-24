@@ -11,10 +11,10 @@ export default function FacilityItem({ facility, index }: { facility: Facility, 
         <div className={itemClass}>
             <div className={styles.leftSection}>
                 <figure className={styles.imageWrapper}>
-                    <img src={facility.imageUrl} alt={facility.name} />
+                    <img src={facility.image_Url} alt={facility.name} />
                 </figure>
                 <ul className={styles.facilityList}>
-                    {facility.labels.map((label, i) => {
+                    {facility.features.map((label, i) => {
                         const hue = hues[i % hues.length];
                         return (
                             <li

@@ -1,9 +1,12 @@
 export interface GalleryImage {
-  id: string;
+  id: number; 
   url: string;
-  description: string;
+  alt: string; 
 }
 
-export type Gallery = {
+export interface GalleryResponse {
+  title: string;
+  subtitle: string;
+  description: string;
   images: GalleryImage[];
 }

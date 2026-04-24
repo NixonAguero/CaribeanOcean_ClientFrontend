@@ -2,19 +2,21 @@ import { useEffect, useState } from "react";
 import { getGalleryImages } from "../services/galery.service";
 import type { GalleryImage } from "../types/gallery.types";
 
-export function useGallery () {
+export function useGallery() {
+    const [imgs, setImgs] = useState<GalleryImage[]>([]); 
+    const [selectedImageId, setSelectedImageId] = useState<number | null>(null);
 
-    const [imgs, setImgs] = useState<GalleryImage[]>();
-    const [selectedImageId, setSelectedImageId] = useState<string | null>();
+    const mainImage = imgs.find(img => img.id === selectedImageId) || imgs[0];
+    const thumbnails = imgs.filter(img => img.id !== (mainImage?.id));
 
-    const mainImage = imgs?.find(img => selectedImageId === img.id) ?? imgs?.[0];
-    const thumbnails = imgs?.filter(img => selectedImageId != img.id)
-
-    useEffect(() =>{
+    useEffect(() => {
         getGalleryImages()
-        .then((res) => setImgs(res))
-        .catch((error) => console.log(error))
-    }, [selectedImageId]);
+            .then((res) => {
+                setImgs(res);
+                if (res.length > 0) setSelectedImageId(res[0].id);
+            })
+            .catch((error) => console.error(error));
+    }, []);
 
-    return {imgs, mainImage, thumbnails, setSelectedImageId}
+    return { imgs, mainImage, thumbnails, setSelectedImageId };
 }

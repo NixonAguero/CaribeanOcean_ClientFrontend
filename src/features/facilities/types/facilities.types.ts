@@ -2,13 +2,13 @@ export interface Facility {
   id: string;
   name: string;
   description: string;
-  imageUrl: string;
-  labels: string[];
+  image_Url: string;
+  features: string[];
 }
 
 export interface FacilitiesSection {
   title: string;
-  description: string;
+  subtitle: string;
   facilities: Facility[];
 }
 

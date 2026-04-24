@@ -10,7 +10,7 @@ export default function Gallery() {
         <div className={styles.aboutUsGallery}>
             <img
                 src={mainImage?.url}
-                alt={mainImage?.description}
+                alt={mainImage?.alt}
                 loading='lazy'
                 className={styles.galleryImage}
             />
@@ -18,7 +18,7 @@ export default function Gallery() {
                 {imgs?.map(img => 
                     <img 
                         src={img.url}
-                        alt={img.description}
+                        alt={img.alt}
                         loading='lazy'
                         className={`${styles.galleryImage} ${styles.galleryThumb}`}
                         onClick={() => setSelectedImageId(img.id)}

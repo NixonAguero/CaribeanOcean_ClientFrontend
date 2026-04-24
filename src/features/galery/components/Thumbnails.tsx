@@ -8,7 +8,7 @@ export default function Thumbnails ({images, onSelect} : ThumbnailsProps){
             {images.map(img => 
                 <img 
                     src={img.url}
-                    alt={img.description}
+                    alt={img.alt}
                     loading='lazy'
                     className={`${styles.galleryImage} ${styles.galleryThumb}`}
                     onClick={() => onSelect(img.id)}

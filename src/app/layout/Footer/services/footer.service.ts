@@ -1,18 +1,22 @@
 import apiClient from "../../../../shared/services/apiClient";
-import type { FooterBrand, HotelContact, HotelLocation, HotelContactInfo} from "../types/footer.types";
+import type { FooterBrand, HotelContact, HotelLocation, HotelContactInfo } from "../types/footer.types";
 
-export async function getHotelContact(): Promise<HotelContactInfo>{
+export async function getHotelContact(): Promise<HotelContactInfo> {
 
     const { data: hotelContacts } = await apiClient.get<HotelContact[]>("/ContactUs");
-    
-    const hotelLocation: HotelLocation = { 
-        location: "The hotel is located fifty yards from Playa Cocles in the middle of the natural beauty of Puerto Viejo de Talamanca, Limón, Costa Rica.",
-        url_location: "https://maps.app.goo.gl/f4LakXLQziZfjidq8"
+    const responseLocation = await apiClient.get<any>("/Locations");
+
+    const hotelLocation: HotelLocation = {
+        location: responseLocation.data.description,
+        url_location: responseLocation.data.images[0].url
     }
 
-    const hotelContactInfo : HotelContactInfo = {       
-        contacts : hotelContacts,
-        location : hotelLocation
+    console.log(hotelLocation)
+    console.log(hotelLocation.url_location)
+
+    const hotelContactInfo: HotelContactInfo = {
+        contacts: hotelContacts,
+        location: hotelLocation
     }
 
     return hotelContactInfo;

@@ -1,7 +1,15 @@
 export interface Room {
   id: string;
   title: string;
-  price: number;
-  image: string;
+  description: string;
+  dailyRate: number;
+  imageUrl: string;
   features: string[];
+  active: boolean;
+}
+
+export interface RoomSection {
+  title: string;
+  subtitle: string;
+  facilities: Room[];
 }
