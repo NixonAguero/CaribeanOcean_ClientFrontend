@@ -54,6 +54,7 @@ export interface BookingSearchFromProps {
   hasSearched: boolean;
   error: string | null;
   isLoading: boolean;
+  roomTypeCatalog: RoomType[];
 }
 export interface BookingSearchResultProps {
   hasSearched: boolean;
@@ -78,15 +79,15 @@ export interface BookingFilters {
 
 
 export interface BookingRequestDto {
-  roomId: number;     
-  checkInDate: string;  
-  checkOutDate: string;
-  guest: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    creditCard: string;
-  };
+  RoomTypeId: number;
+  SeasonId: number;
+  ClientName: string;
+  ClientLastname: string;
+  CardNumber: string;
+  CheckIn: Date;
+  CheckOut: Date;
+  TotalAmount: number;
+  email: string;
 }
 
 export interface BookingResponseDto {

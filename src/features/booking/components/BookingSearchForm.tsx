@@ -6,7 +6,7 @@ import type { BookingSearchFromProps } from '../types/booking.types';
 
 export const BookingSearchForm = ({
   filters, updateFilter,
-  onSearch, hasSearched, error, isLoading
+  onSearch, hasSearched, error, isLoading, roomTypeCatalog
 }: BookingSearchFromProps) => {
   return (
     <section className={styles.searchHero}>
@@ -34,12 +34,19 @@ export const BookingSearchForm = ({
         </div>
         <div className={`${styles.inputGroup} ${styles.centered}`}>
           <label htmlFor="roomType">Room Type</label>
-          <select id="roomType" value={filters.roomType} onChange={(e) => updateFilter("roomType", e.target.value)}>
+          <select
+            id="roomType"
+            value={filters.roomType}
+            onChange={(e) => updateFilter("roomType", e.target.value)}
+          >
             <option value="">Any Type</option>
-            <option value="standard">Standard</option>
-            <option value="deluxe">Deluxe</option>
-            <option value="suite">Suite</option>
-            <option value="villa">Beachfront Villa</option>
+
+            {/* 2. Map dynamically over the data from the backend! */}
+            {roomTypeCatalog.map((room) => (
+              <option key={room.id} value={room.id.toString()}>
+                {room.name}
+              </option>
+            ))}
           </select>
         </div>
         <button type="submit" disabled={isLoading} className={styles.reserveButton}>

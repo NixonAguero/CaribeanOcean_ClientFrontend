@@ -1,24 +1,35 @@
-import { useState } from "react";
-// Aquí debe ir la Interfaz RoomType y el objeto MOCK_ROOM_TYPES que armamos antes
-import { type RoomType, MOCK_ROOM_TYPES, type BookingFilters } from "../types/booking.types"; // (Sugiero guardar esos mocks/interfaces en una carpeta types/)
-import { useLoading } from "../../../shared/hooks/useLoading";
-import { bookingService } from "../services/booking.service";
-
-
+import { useState, useEffect } from "react";
+import { type RoomType, type BookingFilters } from "../types/booking.types";
+import { useRoomTypes } from "./useRoomTypes";
 
 export const useBookingSearch = () => {
   const [filter, setFilters] = useState<BookingFilters>({
     startDate: "",
     endDate: "",
     roomType: "",
-  })
-
+  });
 
   const [hasSearched, setHasSearched] = useState(false);
   const [availableRooms, setAvailableRooms] = useState<RoomType[]>([]);
   const [isRecommendation, setIsRecommendation] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const loadingHook = useLoading(false)
+  const [localError, setLocalError] = useState<string | null>(null);
+
+  // NEW: State for the Select Dropdown
+  const [roomTypeCatalog, setRoomTypeCatalog] = useState<RoomType[]>([]);
+
+  // Consume our Data Hook
+  const { searchAvailableRooms, isSearching, fetchRoomTypeCatalog, isFetchingCatalog } = useRoomTypes();
+
+  // NEW: Fetch the catalog on mount
+  useEffect(() => {
+    const loadCatalog = async () => {
+      const { data, hasError } = await fetchRoomTypeCatalog();
+      if (!hasError && data) {
+        setRoomTypeCatalog(data);
+      }
+    };
+    loadCatalog();
+  }, []); // Empty array ensures this only runs once when the page loads!
 
   const updateFilter = (field: keyof BookingFilters, value: string) => {
     setFilters((prev) => ({
@@ -27,49 +38,53 @@ export const useBookingSearch = () => {
     }));
   };
 
-
-  const handleSearch =  async (e: React.SubmitEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     setHasSearched(true);
     setIsRecommendation(false);
-    setError(null);
-
- 
-
+    setLocalError(null);
 
     if (new Date(filter.startDate) >= new Date(filter.endDate)) {
-      setError("Oops! It looks like your check-out date is before your arrival. Please adjust your dates so we can find your perfect room.");
+      setLocalError("Oops! It looks like your check-out date is before your arrival. Please adjust your dates so we can find your perfect room.");
       setAvailableRooms([]);
       return;
     }
-    
-    try{
-     const results = await loadingHook.withLoading(() => bookingService.searchAvailableRooms(filter));
-     if(results.length === 0) {
-      setIsRecommendation(true);
-      setAvailableRooms(MOCK_ROOM_TYPES);
-     } else {
-      setAvailableRooms(results);
-     }
-    } catch (e:any) {
-      setError("We couldn't connect to our servers. Please try again.");
-    } 
 
-  
+    const { data: results, hasError, errorMessage } = await searchAvailableRooms(filter);
+
+    if (hasError) {
+      setLocalError(errorMessage || "We couldn't connect to our servers. Please try again.");
+      return;
+    }
+
+    if (!results || results.length === 0) {
+      setIsRecommendation(true);
+      // We now use the REAL catalog as the recommendations instead of the mock!
+      setAvailableRooms(roomTypeCatalog); 
+    } else {
+      setAvailableRooms(results);
+    }
   };
+
   const resetSearch = () => {
     setHasSearched(false);
     setAvailableRooms([]);
     setIsRecommendation(false);
-    setError(null);
-    setFilters({
-      startDate: "",
-      endDate: "",
-      roomType: "",
-    });
+    setLocalError(null);
+    setFilters({ startDate: "", endDate: "", roomType: "" });
   };
+
   return {
-    state: { filter, hasSearched, availableRooms, isRecommendation, error, isLoading: loadingHook.isLoading },
+    state: { 
+      filter, 
+      hasSearched, 
+      availableRooms, 
+      isRecommendation, 
+      error: localError, 
+      isLoading: isSearching,
+      roomTypeCatalog, // Export this so your UI can map over it for the <select> options!
+      isFetchingCatalog
+    },
     actions: { updateFilter, handleSearch, resetSearch }
   };
 };
