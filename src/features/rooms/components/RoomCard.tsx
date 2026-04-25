@@ -18,9 +18,9 @@ export default function RoomCard({ room, isActive }: Props) {
 
   return (
     <div className={`${styles.card} ${isActive ? styles.active : ""}`}>
-      <img src={room.imageUrl} alt={room.title} />
-
-      <h3>{room.title}</h3>
+     
+      <img src={room.imageUrl} alt={room.name} />
+      <h3>{room.name}</h3>
       <p>${room.dailyRate.toFixed(2)}</p>
 
       <button
