@@ -11,7 +11,7 @@ export const Badge = ({ text }: { text: string }) => {
     if (t.includes("pool")) return styles.pool;
     if (t.includes("balcony")) return styles.balcony;
 
-    return styles.default;
+    return styles.balcony;
   };
 
   return (
