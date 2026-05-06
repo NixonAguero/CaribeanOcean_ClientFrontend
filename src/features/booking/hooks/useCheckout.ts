@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { type RoomType, type GuestData, type BookingRequestDto } from "../types/booking.types";
+import { type RoomType, type GuestData, type BookingRequestDto, type ReservationPriceResult } from "../types/booking.types";
 import { useReservations } from "./useReservation";
+import { bookingService } from "../services/booking.service";
 
 export const useCheckout = () => {
   const [selectedRoom, setSelectedRoom] = useState<RoomType | null>(null);
@@ -12,10 +13,42 @@ export const useCheckout = () => {
   const [reservationCode, setReservationCode] = useState("");
   const [localError, setLocalError] = useState<string | null>(null);
 
+
+  const [pricePreview, setPricePreview] = useState<ReservationPriceResult | null>(null);
+  const [isPriceLoading, setIsPriceLoading] = useState(false);
+  const [priceError, setPriceError] = useState<string | null>(null);
+
+
   // 1. Consume our new Data Hook
   const { create } = useReservations();
 
-  const handleSelectRoom = (room: RoomType) => setSelectedRoom(room);
+  const handleSelectRoom = async (
+    room: RoomType,
+    startDate: string,
+    endDate: string
+  ) => {
+    setSelectedRoom(room);
+    setPricePreview(null);
+    setPriceError(null);
+
+    try {
+      setIsPriceLoading(true);
+
+      const preview = await bookingService.previewReservationPrice({
+        roomTypeId: room.id,
+        checkIn: startDate,
+        checkOut: endDate,
+        applyOffers: false,
+        selectedOfferId: null,
+      });
+
+      setPricePreview(preview);
+    } catch {
+      setPriceError("Could not calculate reservation price.");
+    } finally {
+      setIsPriceLoading(false);
+    }
+  };
 
   const updateGuestField = (field: keyof GuestData, value: string) => {
     setGuestData((prev) => ({ ...prev, [field]: value }));
@@ -35,14 +68,14 @@ export const useCheckout = () => {
     // Map UI State to Backend DTO Structure
     const reservationPayload: BookingRequestDto = {
       RoomTypeId: selectedRoom.id,
-      SeasonId: 1,
-      CheckIn: new Date(startDate),
-      CheckOut: new Date(endDate),
-      TotalAmount: 0,
       ClientName: guestData.guestName,
       ClientLastname: guestData.guestLastName,
       email: guestData.guestEmail,
-      CardNumber: guestData.creditCard
+      CardNumber: guestData.creditCard,
+      CheckIn: startDate,
+      CheckOut: endDate,
+      applyOffers: false,
+      selectedOfferId: null,
     };
 
     // 2. Execute Data Hook
@@ -74,7 +107,10 @@ export const useCheckout = () => {
       bookingComplete,
       reservationCode,
       error: localError,
-      isLoading: create.isLoading // You can pass this to your CheckoutForm Submit button!
+      isLoading: create.isLoading, // You can pass this to your CheckoutForm Submit button!
+      isPriceLoading,
+      pricePreview,
+      priceError,
     },
     actions: { handleSelectRoom, handleCancelBooking, handleAcceptBooking, resetCheckout, updateGuestField }
   };

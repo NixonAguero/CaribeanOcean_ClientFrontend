@@ -32,6 +32,9 @@ export const Booking = () => {
   if (checkout.state.selectedRoom) {
     return (
       <CheckoutForm
+        isPriceLoading={checkout.state.isPriceLoading}
+        priceError={checkout.state.priceError}
+        pricePreview={checkout.state.pricePreview}
         selectedRoom={checkout.state.selectedRoom}
         guestData={checkout.state.guestData}
         updateGuestField={checkout.actions.updateGuestField}
@@ -64,7 +67,7 @@ export const Booking = () => {
           hasSearched={search.state.hasSearched}
           isRecommendation={search.state.isRecommendation}
           availableRooms={search.state.availableRooms}
-          handleSelectRoom={(room) => checkout.actions.handleSelectRoom(room)}
+          handleSelectRoom={(room) => checkout.actions.handleSelectRoom(room, search.state.filter.startDate, search.state.filter.endDate)}
         />
       )}
     </div>

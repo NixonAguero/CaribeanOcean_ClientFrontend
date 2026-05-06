@@ -13,7 +13,7 @@ export const useRoomTypes = () => {
   const fetchRoomTypeCatalog = async () => {
     return await catalogState.withAsync(() => bookingService.getAllRoomTypes());
   };
-
+  
   return {
     searchAvailableRooms,
     isSearching: searchState.isLoading,
