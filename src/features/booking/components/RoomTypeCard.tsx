@@ -12,8 +12,8 @@ export const RoomTypeCard = ({room, onSelect}: RoomTypeCardProps) => {
     return (
     <div className={styles.roomCard}>
       <div className={styles.roomImagePlaceholder}>
-        {room.image_url ? (
-          <img src={room.image_url} alt={room.name} className={styles.roomImage} />
+        {room.imageUrl ? (
+          <img src={room.imageUrl} alt={room.name} className={styles.roomImage} />
         ) : (
           <span>Image Placeholder</span>
         )}
@@ -27,7 +27,7 @@ export const RoomTypeCard = ({room, onSelect}: RoomTypeCardProps) => {
               <span className={styles.roomType}>{room.type}</span>
             </div>
             <div className={styles.roomPrice}>
-              ${room.daily_rate} <span>/ night</span>
+             From ${room.dailyRate} <span>/ night</span>
             </div>
           </div>
           <p className={styles.roomDescription}>{room.description}</p>

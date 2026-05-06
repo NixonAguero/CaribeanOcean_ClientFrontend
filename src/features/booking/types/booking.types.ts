@@ -42,8 +42,8 @@ export interface RoomType {
   type: string;
   name: string;
   description: string;
-  daily_rate: number;
-  image_url: string;
+  dailyRate: number;
+  imageUrl: string;
 }
 
 
@@ -80,18 +80,45 @@ export interface BookingFilters {
 
 export interface BookingRequestDto {
   RoomTypeId: number;
-  SeasonId: number;
   ClientName: string;
   ClientLastname: string;
   CardNumber: string;
-  CheckIn: Date;
-  CheckOut: Date;
-  TotalAmount: number;
+  CheckIn: string;
+  CheckOut: string;
   email: string;
+  applyOffers: boolean;
+  selectedOfferId: number | null;
 }
 
 export interface BookingResponseDto {
   confirmationCode: string;
   status: string;
+}
+
+export interface CalculateReservationPriceRequest {
+  roomTypeId: number;
+  checkIn: string;
+  checkOut: string;
+  applyOffers: boolean;
+  selectedOfferId: number | null;
+}
+
+export interface ReservationNightPriceDetailResult {
+  stayDate: string;
+  basePrice: number;
+  seasonId: number | null;
+  seasonName: string | null;
+  seasonAdjustmentPercentage: number;
+  offerId: number | null;
+  offerName: string | null;
+  offerDiscountPercentage: number;
+  finalNightPrice: number;
+}
+
+export interface ReservationPriceResult {
+  totalAmount: number;
+  nightCount: number;
+  averageNightlyRate: number;
+  nights: ReservationNightPriceDetailResult[];
 }
 
