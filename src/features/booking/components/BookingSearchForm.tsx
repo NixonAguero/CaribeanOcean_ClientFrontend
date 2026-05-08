@@ -6,13 +6,22 @@ import type { BookingSearchFromProps } from '../types/booking.types';
 
 export const BookingSearchForm = ({
   filters, updateFilter,
-  onSearch, hasSearched, error, isLoading, roomTypeCatalog
+  onSearch, hasSearched, error, isLoading, roomTypeCatalog, hasActiveOffer
 }: BookingSearchFromProps) => {
   return (
     <section className={styles.searchHero}>
       <form className={styles.card} onSubmit={onSearch}>
         <h2 className={styles.title}>Reservation</h2>
-
+        {/* 👇 NUEVO BANNER DE OFERTA 👇 */}
+        {hasActiveOffer && (
+          <div className={styles.offerBadgeContainer}>
+            <span className={styles.offerBadgeIcon}>✨</span>
+            <div className={styles.offerBadgeText}>
+              <strong>Special Offer Activated!</strong>
+              <p>Complete your search to unlock your discounted rates.</p>
+            </div>
+          </div>
+        )}
         {/* NUEVO: Si la variable de estado error tiene texto, dibujamos la alerta */}
         {error && (
           <div className={styles.errorMessageContainer}>

@@ -25,7 +25,10 @@ export const useCheckout = () => {
   const handleSelectRoom = async (
     room: RoomType,
     startDate: string,
-    endDate: string
+    endDate: string,
+    applyOffers = false,
+    selectedOfferId: number | null = null
+
   ) => {
     setSelectedRoom(room);
     setPricePreview(null);
@@ -33,13 +36,18 @@ export const useCheckout = () => {
 
     try {
       setIsPriceLoading(true);
-
+      console.log("room", room)
+      console.log("startDate", startDate)
+      console.log("endDate", endDate)
+      console.log("applyOffers", applyOffers)
+      console.log("selectedOfferId", selectedOfferId)
+      
       const preview = await bookingService.previewReservationPrice({
         roomTypeId: room.id,
         checkIn: startDate,
         checkOut: endDate,
-        applyOffers: false,
-        selectedOfferId: null,
+        applyOffers,
+        selectedOfferId
       });
 
       setPricePreview(preview);
@@ -59,7 +67,7 @@ export const useCheckout = () => {
     setLocalError(null);
   };
 
-  const handleAcceptBooking = async (e: React.FormEvent, startDate: string, endDate: string) => {
+  const handleAcceptBooking = async (e: React.FormEvent, startDate: string, endDate: string, applyOffers = false, selectedOfferId:number | null=null) => {
     e.preventDefault();
     setLocalError(null);
 
@@ -74,8 +82,8 @@ export const useCheckout = () => {
       CardNumber: guestData.creditCard,
       CheckIn: startDate,
       CheckOut: endDate,
-      applyOffers: false,
-      selectedOfferId: null,
+      applyOffers,
+      selectedOfferId
     };
 
     // 2. Execute Data Hook

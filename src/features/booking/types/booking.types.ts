@@ -55,6 +55,7 @@ export interface BookingSearchFromProps {
   error: string | null;
   isLoading: boolean;
   roomTypeCatalog: RoomType[];
+  hasActiveOffer?: boolean; 
 }
 export interface BookingSearchResultProps {
   hasSearched: boolean;

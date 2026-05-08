@@ -15,7 +15,7 @@ export default function OfferCard({ offer }: { offer: Offer }) {
                 <span> &nbsp;|&nbsp; </span>
                 <span>To: {offer.endDate}</span>
             </p>
-            <OfferButton />
+            <OfferButton Id={offer.id} roomTypeId={offer.roomTypeId} />
         </div>
     )
 

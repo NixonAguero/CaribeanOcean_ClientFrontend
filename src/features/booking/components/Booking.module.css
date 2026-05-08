@@ -719,5 +719,44 @@
   }
 }
 
+/* --- Banner de Oferta Activa (Search Form) --- */
+.offerBadgeContainer {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(29, 158, 117, 0.1) 0%, rgba(12, 61, 82, 0.05) 100%);
+  border: 1px solid rgba(29, 158, 117, 0.2);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: -1rem; /* Para acercarlo al título */
+  margin-bottom: 0.5rem;
+  animation: slideDownFade 0.3s ease-out;
+}
+
+.offerBadgeIcon {
+  font-size: 1.5rem;
+}
+
+.offerBadgeText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.offerBadgeText strong {
+  font-family: var(--font-ui, 'Montserrat', sans-serif);
+  color: var(--color-teal, #1D9E75);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.offerBadgeText p {
+  font-family: var(--font-body, 'Lato', sans-serif);
+  color: var(--color-ocean-deep, #0C3D52);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
 
 
