@@ -8,7 +8,6 @@ export async function getFacility(params: paginationParams): Promise<FacilitiesS
 
   const response = await apiClient.get<FacilitiesSection>("/Facility");
   const section = response.data;
-  console.log("API response:", section);
   return {
     ...section,
     facilities: (section.facilities).slice(startIndex, endIndex)
